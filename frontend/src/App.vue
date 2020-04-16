@@ -4,8 +4,7 @@
     <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1280px'">
       <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
-
-    <v-content fluid>
+    <v-content>
       <router-view>
         <!-- content -->
       </router-view>
@@ -38,8 +37,31 @@ export default {
   a {
     text-decoration: none !important;
   }
+
+  p {
+    margin-bottom: 0px !important;
+  }
+
   .app {
     background-color: #F7FAFC !important;
+  }
+
+  .content {
+    padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+    max-width: 980px !important;
+    margin: auto;
+  }
+
+  @media only screen and (min-width: 768px){
+    .content {
+      
+    }
+  }
+
+  @media only screen and (min-width: 1280px){
+    .content {
+      margin-right: 44px;
+    }
   }
   
 </style>
