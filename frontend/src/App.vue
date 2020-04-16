@@ -1,38 +1,42 @@
 <template>
-  <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img alt="Vuetify Logo" class="shrink mr-2" contain src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png" transition="scale-transition" width="40" />
+  <v-app class="app">
+    <the-header @toggle-cart="cartActive = !cartActive"></the-header>
+    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1280px'">
+      <app-cart></app-cart>
+    </v-navigation-drawer>
 
-        <v-img alt="Vuetify Name" class="shrink mt-1 hidden-sm-and-down" contain min-width="100" src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png" width="100" />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn href="https://github.com/vuetifyjs/vuetify/releases/latest" target="_blank" text>
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld />
+    <v-content fluid>
+      <router-view>
+        <!-- content -->
+      </router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import TheHeader from './components/TheHeader';
+import Cart from './components/Cart';
 
 export default {
   name: 'App',
-
   components: {
-    HelloWorld,
+    'the-header': TheHeader,
+    'app-cart': Cart
   },
-
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      cartActive: null,
+    }
+  },
 };
 </script>
+
+<style>
+  body {
+    color: #2D3748 !important;
+  }
+  .app {
+    background-color: #F7FAFC !important;
+  }
+  
+</style>

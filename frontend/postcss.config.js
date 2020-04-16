@@ -1,24 +1,8 @@
-const autoprefixer = require('autoprefixer');
-const tailwindcss = require('tailwindcss');
-const postcssPurgecss = require(`@fullhuman/postcss-purgecss`);
-
-const purgecss = postcssPurgecss({
-    // specify the paths to all of the template files in project.
-    content: [
-        './public/**/*.html',
-        './src/**/*.vue',
-    ],
-
-    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-
-    // whitelist auto generated classes for transitions and router links.
-    whitelistPatterns: [/-(leave|enter|appear)(|-(to|from|active))$/, /^(?!(|.*?:)cursor-move).+-move$/, /^router-link(|-exact)-active$/],
-});
-
 module.exports = {
   plugins: [
-    tailwindcss,
-    autoprefixer,
-    ...process.env.NODE_ENV === 'production' ? [purgecss] : [],
-  ],
-};
+    require('postcss-preset-env')({ stage: 1 }),
+    //require('postcss-import'),
+    require('tailwindcss')('tailwind.config.js'),
+    require('autoprefixer'),
+  ]
+}
