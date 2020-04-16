@@ -59,7 +59,7 @@ export default {
   .header__nav-link {
     color: #A0AEC0 !important;
     display: none;
-    text-decoration: none;
+    text-decoration: none !important;
   }
 
   .header__nav-link:hover {
