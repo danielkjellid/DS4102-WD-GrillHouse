@@ -3,6 +3,11 @@
   <div class="cart">
     <div class="cart__header">
       <p class="cart__header-text">Handlekurv</p>
+      <button @click="toggleCart">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="cart__header-icon">
+          <path d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
     </div>
     <div class="cart__content">
 
@@ -26,7 +31,7 @@
         <span class="cart__footer-total-text">kr 227,00</span>
       </div>
       <router-link to="/cart">
-        <v-btn link block dark :color="'#4633E8'">Gå til kassen</v-btn>
+        <v-btn link block dark :color="'#4633E8'" :elevation="0">Gå til kassen</v-btn>
       </router-link>
     </div>
   </div>
@@ -34,7 +39,12 @@
 
 <script>
 export default {
-
+  methods: {
+    toggleCart() {
+      /* emit click to parent to change cart state */
+      this.$emit('toggle-cart');
+    }
+  }
 }
 </script>
 
@@ -44,8 +54,15 @@ export default {
     height: 64px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 4px 16px;
     border-bottom: 1px solid #E2E8F0;
+  }
+
+  .cart__header-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+    color: #5A67D8;
   }
 
   .cart__header-text {
@@ -107,5 +124,11 @@ export default {
     font-size: 0.875rem;
     font-weight: normal;
     margin-left: 0.5rem;
+  }
+
+  @media only screen and (min-width: 1280px){
+    .cart__header-icon {
+      display: none;
+    }
   }
 </style>

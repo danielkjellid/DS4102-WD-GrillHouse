@@ -2,7 +2,7 @@
   <v-app class="app">
     <the-header @toggle-cart="cartActive = !cartActive"></the-header>
     <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1280px'">
-      <app-cart></app-cart>
+      <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
 
     <v-content fluid>
@@ -34,6 +34,9 @@ export default {
 <style>
   body {
     color: #2D3748 !important;
+  }
+  a {
+    text-decoration: none !important;
   }
   .app {
     background-color: #F7FAFC !important;
