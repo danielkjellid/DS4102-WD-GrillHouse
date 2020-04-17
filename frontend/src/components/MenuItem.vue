@@ -1,24 +1,24 @@
 <!-- component to display a single item -->
 <!-- dependant on MenuList -->
 <template>
-  <div>
+  <div v-if="typeof product != 'undefined'">
     <!-- when the menu item itself is clicked, we activate a modal to display more info -->
-    <div class="menu-item" @click.stop="activateItemModal">
+    <div class="menu-item" @click.stop="activateItemModal(product)">
       <div class="menu-item__info">
-        <h2 class="menu-item__info-title">{{ title }}</h2>
-        <p class="menu-item__info-price">kr {{ price | twoDecimals }}</p>
+        <h2 class="menu-item__info-title">{{ product.name }}</h2>
+        <p class="menu-item__info-price">kr {{ product.price | twoDecimals }}</p>
       </div>
       <div class="menu-item__meta">
         <div>
-          <p class="menu-item__meta-desc">{{ desc }}</p>
+          <p class="menu-item__meta-desc">{{ product.desc }}</p>
           <div class="menu-item__meta-reviews">
             <!-- component to show star rating and color stars dynamically -->
-            <app-review-stars :starValue="starValue"></app-review-stars>
-            <span class="menu-item__meta-reviews-amount">{{ amountOfReviews }} anmeldelser</span>
+            <app-review-stars :starValue="product.starValue"></app-review-stars>
+            <span class="menu-item__meta-reviews-amount">{{ product.amountOfReviews }} anmeldelser</span>
           </div>
         </div>
         <div>
-          <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/cheese.jpg')" max-height="65px" max-width="100px"></v-img>
+          <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/' + product.image)" max-height="65px" max-width="100px"></v-img>
         </div>
       </div>
     </div>
@@ -41,31 +41,10 @@ export default {
     'app-review-stars': ReviewStars
   },
   props: {
-    title: {
-      type: String,
-      required: true,
-      default: 'Item title'
+    product: {
+      type: Object,
+      required: true
     },
-    price: {
-      type: Number,
-      required: true,
-      default: 0
-    },
-    desc: {
-      type: String,
-      required: true,
-      default: 'Item description'
-    },
-    starValue: {
-      type: Number,
-      required: true,
-      default: 0,
-    },
-    amountOfReviews: {
-      type: Number,
-      required: true,
-      default: 0,
-    }
   },
   filters: {
     twoDecimals(value) {
@@ -77,10 +56,16 @@ export default {
       return (Math.round(value * 100) / 100).toFixed(2)
     }
   },
+  data() {
+    return {
+      selectedItem: null
+    }
+  },
   methods: {
-    activateItemModal() {
+    activateItemModal(object) {
+      console.log(object.id)
       // emit event to parent so it can control data state 
-      this.$emit('activate-item-modal');
+      this.$emit('activate-item-modal', object.id);
     }
   }
 }

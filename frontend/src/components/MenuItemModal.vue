@@ -10,13 +10,12 @@
       <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/cheese.jpg')" max-height="205px" min-width="100%"></v-img>
       <div class="modal__header">
         <div class="modal__header-info">
-          <h2 class="modal__header-info-title">Cheese</h2>
+          <h2 class="modal__header-info-title">{{ product.name }}</h2>
           <!-- component that shows and color stars dynamically -->
-          <app-review-stars :starValue="4"></app-review-stars>
+          <app-review-stars :starValue="product.starValue"></app-review-stars>
         </div>
-        <p class="modal__header-desc">
-          Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.
-        </p>
+        <p class="modal__header-desc">{{ product.desc }}</p>
+        <p class="modal__header-price">kr {{ product.price }}</p>
       </div>
       <div class="modal__content">
         <div class="modal__content-form">
@@ -77,6 +76,10 @@ export default {
       type: Boolean,
       required: true,
       default: false,
+    },
+    product: {
+      type: Object,
+      required: true,
     }
   },
   components: {
@@ -154,6 +157,14 @@ export default {
     font-weight: normal;
     font-size: 0.875rem;
     color: #718096;
+    margin-top: 0.5rem;
+  }
+
+  .modal__header-price {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #2D3748;
+    margin-top: 0.5rem;
   }
 
   .modal__content {

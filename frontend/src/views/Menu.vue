@@ -13,12 +13,17 @@
       <!-- target MenuList slot to inject MenuItems -->
       <template #menu-items>
         <!-- use vuetifys grid system to oganize menuitems -->
-        <v-col sm="6" cols="12"  v-for="item in 4" :key="item">
-          <app-menu-item @activate-item-modal="itemModalActive = true" :title="'Cheese'" :price="109.00" :desc="'Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.'" :starValue="4" :amountOfReviews="18"></app-menu-item>
+        <v-col sm="6" cols="12"  v-for="product in products" :key="product.id">
+          <app-menu-item @activate-item-modal="activateModal" :product="product"></app-menu-item>
         </v-col>
       </template>
     </app-menu-list>
-    <app-menu-item-modal @close-modal="itemModalActive = false" :active="itemModalActive"></app-menu-item-modal>
+    <app-menu-item-modal 
+      :product="getProduct(selectedProductId)" 
+      @close-modal="itemModalActive = false" 
+      :active="itemModalActive"
+    >
+    </app-menu-item-modal>
   </div>
 </template>
 
@@ -43,7 +48,24 @@ export default {
   },
   data() {
     return {
-      itemModalActive: false
+      itemModalActive: false,
+      // chose product with id 1 as default to prevent undefined error
+      // works because the value is reset upon item click anyways
+      selectedProductId: 1,
+    }
+  },
+  computed: {
+    products() {
+      return this.$store.getters.getProducts
+    },
+  },
+  methods: {
+    getProduct(id) {
+      return this.$store.getters.getProduct(id)
+    },
+    activateModal(productId) {
+      this.itemModalActive = true
+      this.selectedProductId = productId
     }
   }
 }

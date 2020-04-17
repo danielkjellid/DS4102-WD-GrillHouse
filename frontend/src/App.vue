@@ -29,6 +29,9 @@ export default {
       cartActive: null,
     }
   },
+  created() {
+    this.$store.dispatch('initProducts')
+  }
 };
 </script>
 
