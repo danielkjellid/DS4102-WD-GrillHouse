@@ -23,9 +23,14 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
 import HeaderImage from '../components/AppHeaderImage'
+
+// General imports (componetns with logic)
 import MenuList from '../components/MenuList'
 import MenuItem from '../components/MenuItem'
+
+// Module imports (components dependant on this one)
 import MenuItemModal from '../components/MenuItemModal'
 
 export default {

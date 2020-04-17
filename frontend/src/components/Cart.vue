@@ -3,6 +3,7 @@
   <div class="cart">
     <div class="cart__header">
       <p class="cart__header-text">Handlekurv</p>
+      <!-- button to toggle cart on smaller devices -->
       <button @click="toggleCart">
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="cart__header-icon">
           <path d="M6 18L18 6M6 6l12 12"></path>
@@ -38,15 +39,24 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
 import ButtonPrimary from './AppButtonPrimary'
 
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
+  name: 'Cart',
   components: {
     'app-btn-primary': ButtonPrimary
   },
   methods: {
     toggleCart() {
-      /* emit click to parent to change cart state */
+
+      // emit click to parent to change cart state 
       this.$emit('toggle-cart');
     }
   }

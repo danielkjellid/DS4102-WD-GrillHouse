@@ -1,20 +1,19 @@
 <!-- component to display a single item -->
+<!-- dependant on MenuList -->
 <template>
   <div>
+    <!-- when the menu item itself is clicked, we activate a modal to display more info -->
     <div class="menu-item" @click.stop="activateItemModal">
       <div class="menu-item__info">
         <h2 class="menu-item__info-title">{{ title }}</h2>
-        <p class="menu-item__info-price">kr {{ (Math.round(price * 100) / 100).toFixed(2) }}</p>
+        <p class="menu-item__info-price">kr {{ price | twoDecimals }}</p>
       </div>
       <div class="menu-item__meta">
         <div>
           <p class="menu-item__meta-desc">{{ desc }}</p>
           <div class="menu-item__meta-reviews">
-            <div class="d-flex align-center">
-              <svg v-for="(star, index) in 5" :key="index" class="menu-item__meta-reviews-star" fill="currentColor" :class="{'menu-item__meta-reviews-star--selected': index < starValue}">
-                <path d="M5.256 1.006c.295-.93 1.611-.93 1.906 0l.764 2.408a1 1 0 00.953.697H11.4c.963 0 1.37 1.228.597 1.803l-2.081 1.55a1 1 0 00-.356 1.104l.785 2.475c.293.926-.772 1.685-1.55 1.105l-1.989-1.48a1 1 0 00-1.194 0l-1.989 1.48c-.778.58-1.843-.179-1.55-1.105l.785-2.475a1 1 0 00-.356-1.105L.421 5.913c-.773-.574-.366-1.802.597-1.802h2.521a1 1 0 00.953-.697l.764-2.408z" />
-              </svg>
-            </div>
+            <!-- component to show star rating and color stars dynamically -->
+            <app-review-stars :starValue="starValue"></app-review-stars>
             <span class="menu-item__meta-reviews-amount">{{ amountOfReviews }} anmeldelser</span>
           </div>
         </div>
@@ -27,8 +26,20 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+import ReviewStars from './AppReviewStars'
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
   name: 'MenuItem',
+  components: {
+    'app-review-stars': ReviewStars
+  },
   props: {
     title: {
       type: String,
@@ -56,9 +67,19 @@ export default {
       default: 0,
     }
   },
+  filters: {
+    twoDecimals(value) {
+      // if there isnt a value, return empty string
+      if (!value) return ''
+
+      // parse value an convert it to always show two decimal points
+      value = parseInt(value)
+      return (Math.round(value * 100) / 100).toFixed(2)
+    }
+  },
   methods: {
     activateItemModal() {
-      console.log('click')
+      // emit event to parent so it can control data state 
       this.$emit('activate-item-modal');
     }
   }
