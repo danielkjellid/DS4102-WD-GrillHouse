@@ -117,6 +117,10 @@ export default {
     margin: 1rem;
   }
 
+  .v-alert {
+    margin-bottom: 0;
+  }
+
   .modal {
     position: relative;
   }

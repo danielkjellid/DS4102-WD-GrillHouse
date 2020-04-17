@@ -11,7 +11,7 @@
       </button>
     </div>
     <div class="cart__content">
-
+      <app-cart-list @change-delivery-type="deliveryActive = !deliveryActive" :deliveryActive="deliveryActive"></app-cart-list>
     </div>
     <div class="cart__footer">
       <div>
@@ -19,7 +19,7 @@
           <span class="cart__footer-subtotal-text">Subtotal</span>
           <span class="cart__footer-subtotal-text">kr 168,00</span>
         </div>
-        <div class="cart__footer-subtotal">
+        <div v-if="deliveryActive" class="cart__footer-subtotal">
           <span class="cart__footer-subtotal-text">Levering</span>
           <span class="cart__footer-subtotal-text">kr 59,00</span>
         </div>
@@ -46,12 +46,18 @@ import ButtonPrimary from './AppButtonPrimary'
 // -
 
 // Module imports (components dependant on this one)
-// -
+import CartList from './CartList'
 
 export default {
   name: 'Cart',
   components: {
-    'app-btn-primary': ButtonPrimary
+    'app-btn-primary': ButtonPrimary,
+    'app-cart-list': CartList
+  },
+  data() {
+    return {
+      deliveryActive: true,
+    }
   },
   methods: {
     toggleCart() {
@@ -89,7 +95,7 @@ export default {
 
   .cart__content {
     overflow-y: auto;
-    padding: 2rem, 1.25rem 2rem 1.25rem;
+    padding: 2rem 1.25rem 2rem 1.25rem;
   }
 
   .cart__footer {
