@@ -2,7 +2,8 @@
   <v-app class="app">
     <the-header @toggle-cart="cartActive = !cartActive"></the-header>
     <!-- (side) cart -->
-    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1070px'">
+    <!-- nested inside a navigation drawer to fit propperly with vuetify -->
+    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1100px'">
       <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
     <v-content>

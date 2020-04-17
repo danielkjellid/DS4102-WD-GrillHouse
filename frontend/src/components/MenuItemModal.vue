@@ -1,10 +1,5 @@
 <template>
-  <v-dialog max-width="540px" width="540px" v-model="active">
-    <!--
-    <template v-slot:activator="{ on }">
-      <v-btn v-on="on">Test</v-btn>
-    </template>
-    -->
+  <v-dialog max-width="540px" width="540px" :value="active" @input="closeModal">
     <v-card class="mx-auto modal">
       <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/cheese.jpg')" max-height="205px" min-width="100%"></v-img>
       <div class="modal__header">
@@ -39,7 +34,7 @@
           <div class="modal__content-review">
             <div>
               <div class="modal__content-review-avatar">
-
+                <!-- avatar image -->
               </div>
             </div>
             <div class="modal__content-review-content">
@@ -75,6 +70,13 @@ import ButtonSecondary from './AppButtonSecondary'
 import ReviewStars from './ReviewStars'
 
 export default {
+  props: {
+    active: {
+      type: Boolean,
+      required: true,
+      default: false,
+    }
+  },
   components: {
     'app-btn-primary': ButtonPrimary,
     'app-btn-secondary': ButtonSecondary,
@@ -83,7 +85,6 @@ export default {
   data() {
     return {
       itemAmount: 1,
-      active: true
     }
   },
   methods: {
@@ -92,6 +93,9 @@ export default {
     },
     decreaseAmount() {
       this.itemAmount -= 1;
+    },
+    closeModal() {
+      this.$emit('close-modal')
     }
   }
 }
@@ -107,7 +111,7 @@ export default {
   }
 
   .modal-close {
-    
+
   }
 
   .modal__header {

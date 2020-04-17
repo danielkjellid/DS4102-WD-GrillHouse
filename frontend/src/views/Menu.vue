@@ -14,12 +14,11 @@
       <template #menu-items>
         <!-- use vuetifys grid system to oganize menuitems -->
         <v-col sm="6" cols="12"  v-for="item in 4" :key="item">
-          <app-menu-item :title="'Cheese'" :price="109.00" :desc="'Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.'" :starValue="4" :amountOfReviews="18"></app-menu-item>
+          <app-menu-item @activate-item-modal="itemModalActive = true" :title="'Cheese'" :price="109.00" :desc="'Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.'" :starValue="4" :amountOfReviews="18"></app-menu-item>
         </v-col>
       </template>
     </app-menu-list>
-    <hr>
-    <app-menu-item-modal></app-menu-item-modal>
+    <app-menu-item-modal @close-modal="itemModalActive = false" :active="itemModalActive"></app-menu-item-modal>
   </div>
 </template>
 

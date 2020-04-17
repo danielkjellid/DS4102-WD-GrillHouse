@@ -1,7 +1,7 @@
 <!-- component to display a single item -->
 <template>
   <div>
-    <div class="menu-item">
+    <div class="menu-item" @click.stop="activateItemModal">
       <div class="menu-item__info">
         <h2 class="menu-item__info-title">{{ title }}</h2>
         <p class="menu-item__info-price">kr {{ (Math.round(price * 100) / 100).toFixed(2) }}</p>
@@ -55,6 +55,12 @@ export default {
       required: true,
       default: 0,
     }
+  },
+  methods: {
+    activateItemModal() {
+      console.log('click')
+      this.$emit('activate-item-modal');
+    }
   }
 }
 </script>
@@ -64,6 +70,7 @@ export default {
     border-bottom: 1px solid #E2E8F0;
     width: 100%;
     padding: 1.25rem;
+    cursor: pointer;
   }
 
   .menu-item__info {
@@ -134,7 +141,26 @@ export default {
     }
   }
 
-  @media only screen and (min-width: 1280px){
+  @media only screen and (min-width: 930px){
+    .menu-item {
+      width: 430px;
+    }
+  }
+  
+
+  @media only screen and (min-width: 1100px){
+    .menu-item {
+      width: 357px;
+    }
+  }
+
+  @media only screen and (min-width: 1180px){
+    .menu-item {
+      width: 390px;
+    }
+  }
+
+  @media only screen and (min-width: 1270px){
     .menu-item {
       width: 430px;
     }

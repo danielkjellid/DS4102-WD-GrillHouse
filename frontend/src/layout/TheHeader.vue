@@ -66,7 +66,7 @@ export default {
     color: #718096 !important;
   }
 
-  @media only screen and (min-width: 1280px){
+  @media only screen and (min-width: 1270px){
     .header {
       margin-right: 44px;
     }

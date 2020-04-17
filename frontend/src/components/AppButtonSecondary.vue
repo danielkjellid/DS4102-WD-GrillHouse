@@ -1,5 +1,5 @@
 <template>
-  <v-btn :width="width" link dark :color="'#7F9CF5'" :elevation="0">{{ buttonText }}</v-btn>
+  <v-btn :width="width" link dark :color="'#7F9CF5'" :elevation="0" outlined>{{ buttonText }}</v-btn>
 </template>
 
 <script>
