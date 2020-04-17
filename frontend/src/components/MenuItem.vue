@@ -4,7 +4,7 @@
     <div class="menu-item">
       <div class="menu-item__info">
         <h2 class="menu-item__info-title">{{ title }}</h2>
-        <p class="menu-item__info-price">kr {{ price }}</p>
+        <p class="menu-item__info-price">kr {{ (Math.round(price * 100) / 100).toFixed(2) }}</p>
       </div>
       <div class="menu-item__meta">
         <div>
@@ -18,8 +18,8 @@
             <span class="menu-item__meta-reviews-amount">{{ amountOfReviews }} anmeldelser</span>
           </div>
         </div>
-        <div class="menu-item__meta-img">
-          <!-- image -->
+        <div>
+          <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/cheese.jpg')" max-height="65px" max-width="100px"></v-img>
         </div>
       </div>
     </div>
@@ -120,11 +120,8 @@ export default {
   }
 
   .menu-item__meta-img {
-    width: 120px;
-    height: 65px;
     border-radius: 5px;
     margin-left: 1rem;
-    background-color: salmon;
   }
 
   @media only screen and (min-width: 768px){

@@ -31,14 +31,19 @@
         <span class="cart__footer-total-text">kr 227,00</span>
       </div>
       <router-link to="/cart">
-        <v-btn link block dark :color="'#4633E8'" :elevation="0">Gå til kassen</v-btn>
+        <app-btn-primary :buttonText="'Gå til kassen'" width="100%"></app-btn-primary>
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import ButtonPrimary from './AppButtonPrimary'
+
 export default {
+  components: {
+    'app-btn-primary': ButtonPrimary
+  },
   methods: {
     toggleCart() {
       /* emit click to parent to change cart state */

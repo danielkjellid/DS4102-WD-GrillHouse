@@ -1,7 +1,8 @@
 <template>
   <v-app class="app">
     <the-header @toggle-cart="cartActive = !cartActive"></the-header>
-    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1280px'">
+    <!-- (side) cart -->
+    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1070px'">
       <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
     <v-content>
@@ -13,7 +14,7 @@
 </template>
 
 <script>
-import TheHeader from './components/TheHeader';
+import TheHeader from './layout/TheHeader';
 import Cart from './components/Cart';
 
 export default {
@@ -52,10 +53,8 @@ export default {
     margin: auto;
   }
 
-  @media only screen and (min-width: 768px){
-    .content {
-      
-    }
+  .v-slide-group__prev {
+    display: none !important;
   }
 
   @media only screen and (min-width: 1280px){
