@@ -120,6 +120,7 @@ export default {
 
       // dispatch product, adding it to cart
       this.$store.dispatch('addToCart', productOrder)
+      this.closeModal()
       this.quantity = 1
     }
   }

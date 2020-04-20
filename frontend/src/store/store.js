@@ -10,6 +10,7 @@ export default new Vuex.Store({
     products: [],
     cart: [],
     deliveryPrice: 59,
+    deliveryActive: true
   },
   mutations: {
     'INIT_PRODUCTS'(state, products) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     'INIT_CART'(state, cart) {
       state.cart = cart
+    },
+    'CHANGE_DELIVERY_TYPE'(state) {
+      state.deliveryActive = !state.deliveryActive
     },
     'ADD_TO_CART'(state, { productId, quantity }) {
       // create a product record used to check if item is already in cart
@@ -57,6 +61,9 @@ export default new Vuex.Store({
     initProducts: ({ commit }) => {
       commit('INIT_PRODUCTS', productData)
     },
+    changeDeliveryType: ({commit}) => {
+      commit('CHANGE_DELIVERY_TYPE')
+    },
     addToCart: ({ commit }, order) => {
       commit('ADD_TO_CART', order)
     },
@@ -95,7 +102,23 @@ export default new Vuex.Store({
       })
     },
     getDeliveryPrice: (state) => {
-      return state.deliveryPrice
+      if (state.deliveryActive) {
+        return state.deliveryPrice
+      } else {
+        return 0
+      }
+    },
+    getSubTotal: (state, getters) => {
+      // loop through array and sum prices to show subtotal
+      return getters.getCart.reduce((prev, cur) => prev + cur.price, 0)
+    },
+    getGrandTotal: (state, getters) => {
+      // include delivery fee if delivery is active
+      if (state.deliveryActive) {
+        return getters.getSubTotal + state.deliveryPrice
+      } else {
+        return getters.getSubTotal
+      }
     }
   }
 })

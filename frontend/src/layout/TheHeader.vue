@@ -7,7 +7,7 @@
     </div>
     <v-spacer></v-spacer>
     <div class="header__nav">
-      <router-link to="/">
+      <router-link to="/" class="header__nav-button">
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="header__nav-icon">
           <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
         </svg>
@@ -18,6 +18,8 @@
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="header__nav-icon">
           <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
         </svg>
+        <!-- show amount of items in cart -->
+        <span class="header__nav-button-text">{{ cart.length }}</span>
       </button>
     </div>
   </v-app-bar>
@@ -25,13 +27,17 @@
 
 <script>
 export default {
+  computed: {
+    cart() {
+      return this.$store.getters.getCart
+    }
+  },
   methods: {
     toggleCart() {
       /* emit button click to parent to change cart state */
       this.$emit('toggle-cart');
     }
   }
-
 }
 </script>
 
@@ -47,7 +53,15 @@ export default {
   }
 
   .header__nav-button {
-    margin-left: 0.875rem;
+    margin-left: 0.875rem;  
+    display: flex;
+  }
+
+  .header__nav-button-text {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #A0AEC0;
+    margin-left: 0.25rem;
   }
 
   .header__nav-icon {

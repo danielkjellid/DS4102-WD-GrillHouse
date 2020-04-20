@@ -11,17 +11,22 @@
         <!-- content -->
       </router-view>
     </v-content>
+    <!-- footer that shows up on devices smaller than 1100px -->
+    <!-- contains info about cart -->
+    <the-footer @toggle-cart="cartActive = !cartActive"></the-footer>
   </v-app>
 </template>
 
 <script>
-import TheHeader from './layout/TheHeader';
-import Cart from './components/Cart';
+import TheHeader from './layout/TheHeader'
+import TheFooter from './layout/TheFooter'
+import Cart from './components/Cart'
 
 export default {
   name: 'App',
   components: {
     'the-header': TheHeader,
+    'the-footer': TheFooter,
     'app-cart': Cart
   },
   data() {

@@ -2,11 +2,11 @@
   <div>
     <div class="cart__switch">
       <span class="cart__switch-label">Henting</span>
-      <v-switch class="cart__switch-switch" @change="changeDeliveryType" :input-value="deliveryActive" color="#4633E8"></v-switch>
+      <v-switch class="cart__switch-switch" @change="changeDeliveryType" :input-value="$store.state.deliveryActive" color="#4633E8"></v-switch>
       <span class="cart__switch-label">Levering</span>
     </div>
     <div class="cart__items">
-      <app-cart-item v-for="(item, index) in cart" :key="index" :cartItem="item"></app-cart-item>
+      <app-cart-item v-for="item in cart" :key="item.productId" :cartItem="item"></app-cart-item>
     </div>
   </div>
 </template>
@@ -18,13 +18,6 @@ export default {
   components: {
     'app-cart-item': CartItem
   },
-  props: {
-    deliveryActive: {
-      type: Boolean,
-      required: true,
-      default: true,
-    }
-  },
   computed: {
     cart() {
       return this.$store.getters.getCart
@@ -32,7 +25,8 @@ export default {
   },
   methods: {
     changeDeliveryType() {
-      this.$emit('change-delivery-type');
+      // changes delivery type between deliver and pickup
+      this.$store.dispatch('changeDeliveryType')
     }
   }
 }
