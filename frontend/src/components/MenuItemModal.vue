@@ -15,7 +15,7 @@
           <app-review-stars :starValue="product.starValue"></app-review-stars>
         </div>
         <p class="modal__header-desc">{{ product.desc }}</p>
-        <p class="modal__header-price">kr {{ product.price }}</p>
+        <p class="modal__header-price">{{ product.price | formatPrice | nokPrefix }}</p>
       </div>
       <div class="modal__content">
         <div class="modal__content-form">

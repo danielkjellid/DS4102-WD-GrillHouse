@@ -6,7 +6,7 @@
     <div class="menu-item" @click.stop="activateItemModal(product)">
       <div class="menu-item__info">
         <h2 class="menu-item__info-title">{{ product.name }}</h2>
-        <p class="menu-item__info-price">kr {{ product.price | twoDecimals }}</p>
+        <p class="menu-item__info-price">{{ product.price | formatPrice | nokPrefix }}</p>
       </div>
       <div class="menu-item__meta">
         <div>
@@ -45,16 +45,6 @@ export default {
       type: Object,
       required: true
     },
-  },
-  filters: {
-    twoDecimals(value) {
-      // if there isnt a value, return empty string
-      if (!value) return ''
-
-      // parse value an convert it to always show two decimal points
-      value = parseInt(value)
-      return (Math.round(value * 100) / 100).toFixed(2)
-    }
   },
   data() {
     return {
