@@ -45,13 +45,13 @@
           <v-btn @click="decreaseAmount" icon color="#4633E8">
             <v-icon>mdi-minus</v-icon>
           </v-btn>
-          <span class="modal__footer-amount-amount">{{ itemAmount }}</span>
+          <span class="modal__footer-amount-amount">{{ quantity }}</span>
           <v-btn @click="increaseAmount" icon color="#4633E8">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </div>
         <!-- component to style the applications primary button -->
-        <app-btn-primary :buttonText="'Legg til i kurven'"></app-btn-primary>
+        <app-btn-primary @click.native="buyProduct" :buttonText="'Legg til i kurven'"></app-btn-primary>
       </div>
     </v-card>
   </v-dialog>
@@ -91,17 +91,17 @@ export default {
   },
   data() {
     return {
-      itemAmount: 1,
+      quantity: 1,
       formActive: false,
       reviewSubmitted: false,
     }
   },
   methods: {
     increaseAmount() {
-      this.itemAmount += 1;
+      this.quantity += 1;
     },
     decreaseAmount() {
-      this.itemAmount -= 1;
+      this.quantity -= 1;
     },
     closeModal() {
       // reset component data properties
@@ -110,6 +110,17 @@ export default {
 
       // emit change to parent to change data state 
       this.$emit('close-modal')
+    },
+    buyProduct() {
+      // create a product order containting id of product and quantity
+      const productOrder = {
+        productId: this.product.id,
+        quantity: this.quantity
+      }
+
+      // dispatch product, adding it to cart
+      this.$store.dispatch('addToCart', productOrder)
+      this.quantity = 1
     }
   }
 }

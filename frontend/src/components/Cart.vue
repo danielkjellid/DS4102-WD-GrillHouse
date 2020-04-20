@@ -17,11 +17,11 @@
       <div>
         <div class="cart__footer-subtotal">
           <span class="cart__footer-subtotal-text">Subtotal</span>
-          <span class="cart__footer-subtotal-text">kr 168,00</span>
+          <span class="cart__footer-subtotal-text">{{ subTotal | formatPrice | nokPrefix}}</span>
         </div>
         <div v-if="deliveryActive" class="cart__footer-subtotal">
           <span class="cart__footer-subtotal-text">Levering</span>
-          <span class="cart__footer-subtotal-text">kr 59,00</span>
+          <span class="cart__footer-subtotal-text">{{ deliveryPrice | formatPrice | nokPrefix }}</span>
         </div>
       </div>
       <div class="cart__footer-total">
@@ -29,7 +29,7 @@
           <span class="cart__footer-total-text">Total</span>
           <span class="cart__footer-total-text--grayed">(inkl MVA)</span>
         </div>
-        <span class="cart__footer-total-text">kr 227,00</span>
+        <span class="cart__footer-total-text">{{ grandTotal | formatPrice | nokPrefix }}</span>
       </div>
       <router-link to="/cart">
         <app-btn-primary :buttonText="'Gå til kassen'" width="100%"></app-btn-primary>
@@ -59,12 +59,29 @@ export default {
       deliveryActive: true,
     }
   },
+  computed: {
+    cart() {
+      return this.$store.getters.getCart
+    },
+    deliveryPrice() {
+      return this.$store.getters.getDeliveryPrice
+    },
+    subTotal() {
+      return this.cart.reduce((prev, cur) => prev + cur.price, 0)
+    },
+    grandTotal() {
+      if (this.deliveryActive) {
+        return this.subTotal + this.deliveryPrice
+      } else {
+        return this.subTotal
+      }
+    }
+  },
   methods: {
     toggleCart() {
-
       // emit click to parent to change cart state 
       this.$emit('toggle-cart');
-    }
+    },
   }
 }
 </script>

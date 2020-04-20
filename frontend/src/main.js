@@ -12,19 +12,18 @@ Vue.config.productionTip = false
 
 // format price to always have two decimals
 Vue.filter('formatPrice', (value) => {
-  // if there isnt a value, return empty string
-  if (!value) return ''
+  // if there isnt a value, return 0
+  if (!value) return (0.00).toFixed(2)
 
   // parse value an convert it to always show two decimal points
   value = parseInt(value)
+
   return (Math.round(value * 100) / 100).toFixed(2)
 })
 
 // format price with NOK currency prefix
 Vue.filter('nokPrefix', (value) => {
-  // if there isnt a value, return empty string
-  if (!value) return ''
-
+  
   // parse value an convert it to always show two decimal points
   value = value.toString()
   return 'kr ' + value

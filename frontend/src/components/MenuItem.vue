@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     activateItemModal(object) {
-      console.log(object.id)
       // emit event to parent so it can control data state 
       this.$emit('activate-item-modal', object.id);
     }

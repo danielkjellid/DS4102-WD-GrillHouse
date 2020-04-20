@@ -2,34 +2,34 @@
   <div class="cart__item">
     <div class="cart__item-info">
       <div class="cart__item-info-controls">
-        <v-btn x-small icon color="#4633E8">
+        <v-btn @click="decreaseAmount" x-small icon color="#4633E8">
           <v-icon small>mdi-minus</v-icon>
         </v-btn>
-        <span class="cart__item-info-controls-amount">{{ itemAmount }}</span>
-        <v-btn x-small icon color="#4633E8">
+        <span class="cart__item-info-controls-amount">{{ cartItem.quantity }}</span>
+        <v-btn @click="increaseAmount" x-small icon color="#4633E8">
           <v-icon small>mdi-plus</v-icon>
         </v-btn>
       </div>
-      <span class="cart__item-info-item">{{ itemName }}</span>
+      <span class="cart__item-info-item">{{ cartItem.name }}</span>
     </div>
-    <span class="cart__item-price">kr {{ itemPrice }}</span>
+    <span class="cart__item-price">{{ cartItem.price | formatPrice | nokPrefix }}</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    itemName: {
-      type: String,
-      required: true
+    cartItem: {
+      type: Object,
+      required: true,
+    }
+  },
+  methods: {
+    decreaseAmount() {
+      this.$store.dispatch('decreaseCartItemAmount', this.cartItem.id)
     },
-    itemPrice: {
-      type: Number,
-      required: true
-    },
-    itemAmount: {
-      type: Number,
-      required: true
+    increaseAmount() {
+      this.$store.dispatch('increaseCartItemAmount', this.cartItem.id)
     }
   }
 }

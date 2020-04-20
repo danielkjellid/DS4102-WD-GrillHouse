@@ -6,7 +6,7 @@
       <span class="cart__switch-label">Levering</span>
     </div>
     <div class="cart__items">
-      <app-cart-item itemName="Cheese" :itemPrice="109.00" :itemAmount="1"></app-cart-item>
+      <app-cart-item v-for="(item, index) in cart" :key="index" :cartItem="item"></app-cart-item>
     </div>
   </div>
 </template>
@@ -23,6 +23,11 @@ export default {
       type: Boolean,
       required: true,
       default: true,
+    }
+  },
+  computed: {
+    cart() {
+      return this.$store.getters.getCart
     }
   },
   methods: {
