@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+// views imports
 import Menu from '../views/Menu'
+import Checkout from '../views/Checkout'
 
 // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
 
@@ -12,6 +15,11 @@ Vue.use(VueRouter)
     name: 'Menu',
     component: Menu
   },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: Checkout
+  }
 ]
 
 const router = new VueRouter({

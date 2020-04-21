@@ -3,7 +3,8 @@
     <the-header @toggle-cart="cartActive = !cartActive"></the-header>
     <!-- (side) cart -->
     <!-- nested inside a navigation drawer to fit propperly with vuetify -->
-    <v-navigation-drawer app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1100px'">
+    <!-- hide sidecart during checkout process -->
+    <v-navigation-drawer v-if="$route.matched.some(({ name }) => name != 'Checkout')" app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1100px'">
       <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
     <v-content>
@@ -64,6 +65,16 @@ export default {
 
   .v-slide-group__prev {
     display: none !important;
+  }
+
+  .theme--light.v-label {
+    color: #2D3748 !important;
+    font-weight: 500 !important;
+    font-size: 0.875rem !important;
+  }
+
+  .v-input--radio-group--column .v-radio:not(:last-child):not(:only-child) {
+    margin-bottom: 0px !important;
   }
 
   @media only screen and (min-width: 1280px){

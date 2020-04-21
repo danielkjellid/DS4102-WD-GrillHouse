@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
+import router from './router/routes'
 import store from './store/store'
 
 import vuetify from './plugins/vuetify';
-import tailwind from './assets/css/tailwind.css'
 
 Vue.config.productionTip = false
 
@@ -17,13 +16,11 @@ Vue.filter('formatPrice', (value) => {
 
   // parse value an convert it to always show two decimal points
   value = parseInt(value)
-
   return (Math.round(value * 100) / 100).toFixed(2)
 })
 
 // format price with NOK currency prefix
 Vue.filter('nokPrefix', (value) => {
-  
   // parse value an convert it to always show two decimal points
   value = value.toString()
   return 'kr ' + value
@@ -34,6 +31,5 @@ new Vue({
   router,
   store,
   vuetify,
-  tailwind,
   render: h => h(App)
 }).$mount('#app')

@@ -101,6 +101,10 @@ export default new Vuex.Store({
         }
       })
     },
+    getCartQuantity: (state, getters) => {
+      // loop through array and quantity to show amount
+      return getters.getCart.reduce((prev, cur) => prev + cur.quantity, 0)
+    },
     getDeliveryPrice: (state) => {
       if (state.deliveryActive) {
         return state.deliveryPrice

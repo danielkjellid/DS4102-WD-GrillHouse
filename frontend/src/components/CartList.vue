@@ -1,3 +1,5 @@
+<!-- component to display the list of items in cart -->
+<!-- also gives the user the ability to change delivery type -->
 <template>
   <div>
     <div class="cart__switch">
@@ -12,9 +14,17 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
 import CartItem from './CartItem'
 
 export default {
+  name: 'CartList',
   components: {
     'app-cart-item': CartItem
   },

@@ -1,3 +1,6 @@
+<!-- component to display item in product list -->
+<!-- gives the user the ability to adjust amount while viewing quantity, name and price -->
+<!-- dependant on CartList -->
 <template>
   <div class="cart__item">
     <div class="cart__item-info">
@@ -17,7 +20,17 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
+  name: 'CartItem',
   props: {
     cartItem: {
       type: Object,
