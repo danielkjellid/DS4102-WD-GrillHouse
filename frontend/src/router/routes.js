@@ -19,7 +19,12 @@ Vue.use(VueRouter)
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
-  }
+  },
+  {
+    path: '/testapi',
+    name: 'TestAPI',
+    component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI.vue')
+  },
 ]
 
 const router = new VueRouter({

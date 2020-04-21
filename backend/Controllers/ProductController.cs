@@ -13,10 +13,10 @@ namespace GrillHouseAPI.Controllers{
 
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController : ControllerBase {
-        private readonly ProductsContext _context;
+    public class ProductController : ControllerBase {
+        private readonly GrillHouseContext _context;
         private readonly IWebHostEnvironment _hosting;
-        public ProductsController(ProductsContext context, IWebHostEnvironment hosting){
+        public ProductController(GrillHouseContext context, IWebHostEnvironment hosting){
             _context = context;
             _hosting = hosting;
         }
