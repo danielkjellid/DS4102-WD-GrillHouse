@@ -4,8 +4,7 @@ import VueRouter from 'vue-router'
 // views imports
 import Menu from '../views/Menu'
 import Checkout from '../views/Checkout'
-
-// component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+import AdminOverview from '../views/AdminOverview'
 
 Vue.use(VueRouter)
 
@@ -19,6 +18,11 @@ Vue.use(VueRouter)
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/admin',
+    name: 'AdminOverview',
+    component: AdminOverview
   },
   {
     path: '/testapi',

@@ -102,7 +102,7 @@ export default new Vuex.Store({
       })
     },
     getCartQuantity: (state, getters) => {
-      // loop through array and quantity to show amount
+      // loop through array and quantity to show amount of items in cart
       return getters.getCart.reduce((prev, cur) => prev + cur.quantity, 0)
     },
     getDeliveryPrice: (state) => {

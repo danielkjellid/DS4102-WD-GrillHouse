@@ -4,7 +4,7 @@
     <!-- (side) cart -->
     <!-- nested inside a navigation drawer to fit propperly with vuetify -->
     <!-- hide sidecart during checkout process -->
-    <v-navigation-drawer v-if="$route.matched.some(({ name }) => name != 'Checkout')" app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1100px'">
+    <v-navigation-drawer v-if="$route.matched.some(({ name }) => name === 'Menu')" app fixed right v-model="cartActive" :width="'300px'" :mobile-break-point="'1100px'">
       <app-cart @toggle-cart="cartActive = !cartActive"></app-cart>
     </v-navigation-drawer>
     <v-content>
