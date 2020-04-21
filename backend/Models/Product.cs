@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GrillHouseAPI.Models{
     public class Product{
@@ -8,6 +9,7 @@ namespace GrillHouseAPI.Models{
         public float Price { get; set; }
         public string Description { get; set; }
         public string Image { get; set; } // Skal være bilde
+
         public int CategoryId { get; set; }
     }
 }

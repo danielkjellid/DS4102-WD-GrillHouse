@@ -12,6 +12,11 @@ Vue.use(VueRouter)
     name: 'Menu',
     component: Menu
   },
+  {
+    path: '/testapi',
+    name: 'TestAPI',
+    component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI.vue')
+  },
 ]
 
 const router = new VueRouter({

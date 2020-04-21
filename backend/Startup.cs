@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using GrillHouseAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend
 {
@@ -33,6 +35,7 @@ namespace backend
                         .AllowAnyHeader()  
                 )
             );
+            services.AddDbContext<GrillHouseContext>( options => options.UseSqlite("Data Source=Grillhouse.db") );
             services.AddControllers();
         }
 
