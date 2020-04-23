@@ -10,21 +10,23 @@
     </article>
     <hr>
 
-    <h3>Legg til nytt produkt</h3>
-    <label>Navn</label>
-    <input type="text" v-model="newProduct.name"><br>
-    
-    <label>Pris</label>
-    <input type="text" v-model="newProduct.price"><br>
-    
-    <label>Beskrivelse</label>
-    <input type="text" v-model="newProduct.description"><br>
+    <form>
+        <h3>Legg til nytt produkt</h3>
+        <label>Navn</label>
+        <input type="text" v-model="newProduct.name"><br>
 
-    <label>Kategori</label>
-    <input type="text" v-model="newProduct.categoryId"><br>
-    
-    <v-file-input v-model="file" show-size></v-file-input>
-    <input @click="addNewProduct" type="button" value="Lagre nytt produkt">
+        <label>Pris</label>
+        <input type="text" v-model="newProduct.price"><br>
+
+        <label>Beskrivelse</label>
+        <input type="text" v-model="newProduct.description"><br>
+
+        <label>Kategori</label>
+        <input type="text" v-model="newProduct.categoryId"><br>
+
+        <v-file-input v-model="file" show-size></v-file-input>
+        <input @click="addNewProduct" type="submit" value="Lagre nytt produkt">
+    </form>
   </div>
 </template>
 
@@ -36,36 +38,35 @@ export default {
     data(){
         return{
             products: [],
-            newProduct: {name: "", price: "", description: "", categoryId: "", image: "" },
+            newProduct: { name: "", price: "", description: "", image: "", categoryId: "" },
             file: null
         }
     },
     methods: {
         addNewProduct(){
-            
-
-            this.newProduct.image = this.file.name;
+            this.newProduct.image = this.file.name; 
 
             let data = new FormData();
             data.append("file", this.file);
 
-            axios.post( "https://localhost:5001/product", this.newProduct )
+            axios.post( "https://localhost:5001/products", this.newProduct )
                 .then( result =>  {
                     console.log(result.data)
 
                     axios({
                         method: "POST",
-                        url: "https://localhost:5001/product/UploadImage",
+                        url: "https://localhost:5001/productsadmin/uploadimage",
                         data: data,
                         config: { headers: { 'Content-Type': 'multipart/form-data' } }
                     })
-                })
+                }) 
+            
 
             console.log(this.newProduct)
         }
     },
     created(){
-        const webAPIUrl = "https://localhost:5001/product";
+        const webAPIUrl = "https://localhost:5001/products";
 
         axios.get(webAPIUrl)
             .then( result => {
