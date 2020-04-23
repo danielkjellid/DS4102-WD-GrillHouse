@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { productData } from '../data/products'
+import { reviewData } from '../data/reviews'
 
 Vue.use(Vuex)
 
@@ -9,6 +10,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     cart: [],
+    reviews: [],
     deliveryPrice: 59,
     deliveryActive: true
   },
@@ -18,6 +20,12 @@ export default new Vuex.Store({
     },
     'INIT_CART'(state, cart) {
       state.cart = cart
+    },
+    'INIT_REVIEWS'(state, reviews) {
+      state.reviews = reviews
+    },
+    'ADD_REVIEW'(state, review) {
+      state.reviews = [...state.reviews, review]
     },
     'CHANGE_DELIVERY_TYPE'(state) {
       state.deliveryActive = !state.deliveryActive
@@ -61,6 +69,9 @@ export default new Vuex.Store({
     initProducts: ({ commit }) => {
       commit('INIT_PRODUCTS', productData)
     },
+    initReviews: ({ commit }) => {
+      commit("INIT_REVIEWS", reviewData)
+    },
     changeDeliveryType: ({commit}) => {
       commit('CHANGE_DELIVERY_TYPE')
     },
@@ -72,6 +83,9 @@ export default new Vuex.Store({
     },
     increaseCartItemAmount: ({ commit }, order) => {
       commit('INCREASE_CART_ITEM_AMOUNT', order)
+    },
+    addReview: ({ commit }, review) => {
+      commit("ADD_REVIEW", review)
     }
   },
   getters: {
@@ -123,6 +137,12 @@ export default new Vuex.Store({
       } else {
         return getters.getSubTotal
       }
+    },
+    getReviews: (state) => {
+      return state.reviews
+    },
+    getProductReviews: (state) => (id) => {
+      return state.reviews.filter((review) => review.productId === id)
     }
   }
 })
