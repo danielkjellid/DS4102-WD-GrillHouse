@@ -2,8 +2,29 @@
     <div>
     <h1>Api testing fra sia</h1>
     <article v-for="product in products" :key="product.productId">
-        <h3> {{product.productId}} -- {{product.name}} -- {{product.price}} -- {{product.description}} -- {{product.image}} -- {{product.category}} </h3>
+        <h3> ( {{product.productId}} ) {{product.name}} </h3>
+        <p>{{product.price}}</p>
+        <p>{{product.description}}</p>
+        <p>{{product.categoryId}} </p>
+        <img :src="`https://localhost:5001/grillhouse-images/${product.image}`" alt="" style="height:100px;">
     </article>
+    <hr>
+
+    <h3>Legg til nytt produkt</h3>
+    <label>Navn</label>
+    <input type="text" v-model="newProduct.name"><br>
+    
+    <label>Pris</label>
+    <input type="text" v-model="newProduct.price"><br>
+    
+    <label>Beskrivelse</label>
+    <input type="text" v-model="newProduct.description"><br>
+
+    <label>Kategori</label>
+    <input type="text" v-model="newProduct.categoryId"><br>
+    
+    <v-file-input v-model="file" show-size></v-file-input>
+    <input @click="addNewProduct" type="button" value="Lagre nytt produkt">
   </div>
 </template>
 
@@ -14,29 +35,50 @@ export default {
     name: 'TestApi',
     data(){
         return{
-            products: [ { productId: 999, name: 'Dumburger', price: 1337, description: "superkvalitet", image: "dum.jpg", category: 'ja' } ]
+            products: [],
+            newProduct: {name: "", price: "", description: "", categoryId: "", image: "" },
+            file: null
+        }
+    },
+    methods: {
+        addNewProduct(){
+            
+
+            this.newProduct.image = this.file.name;
+
+            let data = new FormData();
+            data.append("file", this.file);
+
+            axios.post( "https://localhost:5001/product", this.newProduct )
+                .then( result =>  {
+                    console.log(result.data)
+
+                    axios({
+                        method: "POST",
+                        url: "https://localhost:5001/product/UploadImage",
+                        data: data,
+                        config: { headers: { 'Content-Type': 'multipart/form-data' } }
+                    })
+                })
+
+            console.log(this.newProduct)
         }
     },
     created(){
-        let webapiurl = "https://localhost:5001/product";
+        const webAPIUrl = "https://localhost:5001/product";
 
-        axios.get(webapiurl)
-            .then(result => {
+        axios.get(webAPIUrl)
+            .then( result => {
                 this.products = result.data;
-                console.log(result.data);
-            })
-
-        let urlnrto = "https://localhost:5001/category"
-
-        axios.get(urlnrto)
-            .then(result => {
-                console.log(result.data);
             })
     }
 
 }
 </script>
 
-<style>
-
+<style scoped>
+    input{
+        border: 1px solid black;
+        margin-left: 20px;
+    }
 </style>

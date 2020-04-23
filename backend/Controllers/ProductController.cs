@@ -34,7 +34,7 @@ namespace GrillHouseAPI.Controllers{
         }
 
         [HttpPost]
-        public async Task<Product> ProductAsync(Product newProduct){
+        public async Task<Product> Post(Product newProduct){
             _context.Product.Add(newProduct);
             await _context.SaveChangesAsync();
             return newProduct;
@@ -45,7 +45,7 @@ namespace GrillHouseAPI.Controllers{
         [Route("[action]")]
         public void UploadImage(IFormFile file){
             string webrootpath = _hosting.WebRootPath;
-            string absolutepath = Path.Combine($"{webrootpath}/product-images/{file.FileName}");
+            string absolutepath = Path.Combine($"{webrootpath}/grillhouse-images/{file.FileName}");
 
             using(var filestream = new FileStream(absolutepath, FileMode.Create)){
                 file.CopyTo( filestream );
