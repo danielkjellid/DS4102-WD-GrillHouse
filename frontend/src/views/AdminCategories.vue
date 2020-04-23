@@ -1,10 +1,10 @@
 <template>
   <div>
     <app-admin-template 
-      pageTitle="Produkter" 
-      pageMainAction="Nytt produkt" 
-      :tableHeaders="productHeaders" 
-      :tableContent="products"
+      pageTitle="Kategorier" 
+      pageMainAction="Ny kateogri" 
+      :tableHeaders="categoryHeaders" 
+      :tableContent="categories"
       :defaultItem="objectStructure"
     ></app-admin-template>
   </div>
@@ -19,23 +19,15 @@ export default {
   },
   data() {
     return {
-      productHeaders: [
-        { text: 'Bilde', align: 'start', sortable: false, value: 'image', },
+      categoryHeaders: [
         { text: 'Id', value: 'id' },
         { text: 'Navn', value: 'name', sortable: false },
-        { text: 'Beskrivelse', value: 'description', sortable: false },
-        { text: 'Pris', value: 'price' },
-        { text: 'Vurdering', value: 'assesment' },
         { text: 'Handlinger', value: 'actions', sortable: false },
       ],
-      products: [],
+      categories: [],
       objectStructure: {
         id: 0,
         name: '',
-        description: '',
-        price: 0,
-        image: '',
-        assesment: 0,
       }
     }
   },
@@ -46,14 +38,10 @@ export default {
   methods: {
     initialize() {
       // populate array with items to be displayed in table
-      this.products = [
+      this.categories = [
         {
           id: 1,
-          name: 'Cheese',
-          description: 'Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.',
-          price: 109.00,
-          image: '',
-          assesment: 3,
+          name: 'Burgere',
         },
         // ...
       ]

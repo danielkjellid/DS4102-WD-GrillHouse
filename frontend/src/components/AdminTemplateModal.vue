@@ -7,17 +7,16 @@
       <v-card-text>
         <v-container>
           <v-row>
-            <v-col cols="12">
-              <v-text-field v-model="editedItem.name" label="Navn"></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-textarea v-model="editedItem.description" label="Beskrivelse"></v-textarea>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-text-field v-model="editedItem.price" label="Pris"></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-file-input label="Bilde"></v-file-input>
+            <v-col v-for="(item, key, index) in editedItem" :key="index" cols="12">
+              <div v-if="typeof key === 'string' && key != 'image'">
+                <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
+              </div>
+              <div v-else-if="typeof key === 'number'">
+                <v-text-field v-model="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
+              </div>
+              <div v-else-if="typeof key === 'string' && key === 'image'">
+                <v-file-input :label="key.toString()"></v-file-input>
+              </div>
             </v-col>
           </v-row>
         </v-container>

@@ -7,12 +7,15 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="start">
           <v-col>
-            <h1 class="headline mb-5">{{ pageTitle }}</h1>            
+            <h1 class="headline mb-5">{{ pageTitle }}</h1>
+            <!-- create table and populate it with data sent from parent -->         
             <v-data-table :headers="tableHeaders" :items="tableContent" sort-by="id" class="elevation-1">
               <template #top>
                 <v-toolbar flat color="white">
                   <v-spacer></v-spacer>
+                  <!-- button that activates modal, labled as main page action -->
                   <v-btn @click.stop="modalOpen = true" color="primary" dark class="mb-2">{{ pageMainAction }}</v-btn>
+                  <!-- modal that allows you to edit or create a new item -->
                   <app-admin-template-modal 
                     :active="modalOpen" 
                     :editedIndex="editedIndex"
@@ -24,6 +27,7 @@
                   </app-admin-template-modal>
                 </v-toolbar>
               </template>
+              <!-- item sepcific delete and edit actions -->
               <template #item.actions="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
                   mdi-pencil
@@ -32,6 +36,7 @@
                   mdi-delete
                 </v-icon>
               </template>
+              <!-- if there are no data, display message -->
               <template #no-data>
                 <p>Ingen data funnet</p>
               </template>
@@ -70,32 +75,26 @@ export default {
     tableContent: {
       type: Array,
       required: true
+    },
+    defaultItem: {
+      type: Object,
+      required: true
     }
   },
   data() {
     return {
       modalOpen: false,
-      defaultItem: {
-        image: '',
-        id: 0,
-        name: '',
-        description: '',
-        price: 0,
-        assesment: 0,
-      },
       editedIndex: -1,
-      editedItem: {
-        image: '',
-        id: 0,
-        name: '',
-        description: '',
-        price: 0,
-        assesment: 0,
-      },
+      editedItem: {},
     }
   },
+  created() {
+    // as the strucutre of the objects changes based on what item to display
+    // we dynamically set the structure based on the prop sent down
+    this.editedItem = Object.assign({}, this.defaultItem)
+  },
   methods: {
-    editItem (item) {
+    editItem(item) {
       // takes clicked item and sets editedIndex (used for temporary storing object place in array)
       // then sets the edited item equal to the object, and opens dialog
       this.editedIndex = this.tableContent.indexOf(item)
@@ -104,7 +103,7 @@ export default {
 
       // TODO: link up so it puts in DB
     },
-    deleteItem (item) {
+    deleteItem(item) {
       // takes the clicked item and splices (removes) it from array on confirm alert
       const index = this.tableContent.indexOf(item)
       confirm('Are you sure you want to delete this item?') && this.tableContent.splice(index, 1)
