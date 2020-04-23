@@ -21,11 +21,14 @@
         <label>Beskrivelse</label>
         <input type="text" v-model="newProduct.description"><br>
 
+        <input type="text" v-model="newProduct.image"><br>
+
         <label>Kategori</label>
         <input type="text" v-model="newProduct.categoryId"><br>
 
-        <v-file-input v-model="file" show-size></v-file-input>
-        <input @click="addNewProduct" type="submit" value="Lagre nytt produkt">
+        <!-- <v-file-input v-model="file" show-size></v-file-input> -->
+
+        <button @click="addNewProduct">skjært</button>
     </form>
   </div>
 </template>
@@ -43,30 +46,36 @@ export default {
         }
     },
     methods: {
-        addNewProduct(){
-            this.newProduct.image = this.file.name; 
+        addNewProduct(e){
+            e.preventDefault();
+            /* this.newProduct.image = this.file.name; 
 
             let data = new FormData();
-            data.append("file", this.file);
+            data.append("file", this.file); */
+            const product = { name: this.newProduct.name, 
+            price: this.newProduct.price,
+            description: this.newProduct.description,
+            image: this.newProduct.image,
+            categoryId: this.newProduct.categoryId }
 
-            axios.post( "https://localhost:5001/products", this.newProduct )
-                .then( result =>  {
+            axios.post( "https://localhost:5001/product", product );
+                /* .then( result =>  {
                     console.log(result.data)
 
                     axios({
                         method: "POST",
-                        url: "https://localhost:5001/productsadmin/uploadimage",
+                        url: "https://localhost:5001/product/uploadimage",
                         data: data,
                         config: { headers: { 'Content-Type': 'multipart/form-data' } }
                     })
-                }) 
+                })  */
             
 
             console.log(this.newProduct)
         }
     },
     created(){
-        const webAPIUrl = "https://localhost:5001/products";
+        const webAPIUrl = "https://localhost:5001/product";
 
         axios.get(webAPIUrl)
             .then( result => {
