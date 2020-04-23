@@ -4,10 +4,16 @@ import VueRouter from 'vue-router'
 // views imports
 import Menu from '../views/Menu'
 import Checkout from '../views/Checkout'
+import PageNotFound from '../views/PageNotFound'
 
 Vue.use(VueRouter)
 
   const routes = [
+  {
+    path: '*',
+    name: 'PageNotFound',
+    component: PageNotFound
+  },
   {
     path: '/',
     name: 'Menu',

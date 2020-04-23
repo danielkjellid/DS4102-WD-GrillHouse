@@ -41,10 +41,10 @@ export default {
   },
   created () {
     // populate table with data
-    this.initialize()
+    this.initializeData()
   },
   methods: {
-    initialize() {
+    initializeData() {
       // populate array with items to be displayed in table
       this.products = [
         {
