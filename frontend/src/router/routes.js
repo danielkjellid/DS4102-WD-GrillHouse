@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 // views imports
 import Menu from '../views/Menu'
 import Checkout from '../views/Checkout'
-import AdminOverview from '../views/AdminOverview'
 
 Vue.use(VueRouter)
 
@@ -19,10 +18,14 @@ Vue.use(VueRouter)
     name: 'Checkout',
     component: Checkout
   },
+  
+  // we lazy load all components behind the /admin route
+  // in a real life application only a selected few will have access to this part of the app
+  // therefore we can reduce load time and bundly size by lazy loading
   {
     path: '/admin',
     name: 'AdminOverview',
-    component: AdminOverview
+    component: () => import (/* webpackChunkName: "AdminProducts" */ '../views/AdminProducts')
   },
   {
     path: '/testapi',
