@@ -44,6 +44,11 @@ Vue.use(VueRouter)
     name: 'TestAPI',
     component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI.vue')
   },
+  {
+    path: '/testapi2',
+    name: 'TestAPI2',
+    component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI2.vue')
+  },
 ]
 
 const router = new VueRouter({
