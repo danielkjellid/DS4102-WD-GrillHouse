@@ -9,10 +9,10 @@ namespace API.controllers {
 
   [ApiController]
   [Route("[controller]")]
-  public class CategoryController : ControllerBase {
+  public class CategoriesController : ControllerBase {
 
-    private readonly CategoryContext _context;
-    public CategoryController(CategoryContext context) {
+    private readonly APIContext _context;
+    public CategoriesController(APIContext context) {
       _context = context;
     }
 

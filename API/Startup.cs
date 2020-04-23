@@ -39,7 +39,7 @@ namespace API
                     );
                 }
             );
-            services.AddDbContext<CategoryContext>( options => options.UseSqlite("Data Source=API.db"));
+            services.AddDbContext<APIContext>( options => options.UseSqlite("Data Source=API.db"));
             services.AddControllers();
         }
 
