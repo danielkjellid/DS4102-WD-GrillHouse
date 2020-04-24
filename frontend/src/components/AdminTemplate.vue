@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import TheAdminHeader from '../layout/TheAdminHeader'
 import AdminTemplateModal from './AdminTemplateModal'
 
@@ -79,6 +81,10 @@ export default {
     defaultItem: {
       type: Object,
       required: true
+    },
+    dbInstance: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -92,8 +98,17 @@ export default {
     // as the strucutre of the objects changes based on what item to display
     // we dynamically set the structure based on the prop sent down
     this.editedItem = Object.assign({}, this.defaultItem)
+
+    // populate table with data
+    this.initializeData()
   },
   methods: {
+    initializeData() {
+      axios.get(this.dbInstance)
+        .then(res => {
+          this.tableContent = res.data
+        })
+    },
     editItem(item) {
       // takes clicked item and sets editedIndex (used for temporary storing object place in array)
       // then sets the edited item equal to the object, and opens dialog
@@ -114,9 +129,13 @@ export default {
       Object.assign(this.tableContent[value.editedIndex], value.editedItem)
     },
     newItem(value) {
-      // temporary push mutating prop directly
-      // will be replaced with axios and DB create
-      this.tableContent.push(value)
+      // post new item to db
+      // route of post is set trough dbInstance given by parent
+      axios.post(this.dbInstance, value)
+        .then(() => {
+          this.initializeData()
+        })
+        .catch(error => console.error(error))
     },
     closeModal() {
       // close modal and reset the editedItem as well as editedIndex

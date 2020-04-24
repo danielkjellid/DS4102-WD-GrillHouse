@@ -6,6 +6,7 @@
       :tableHeaders="categoryHeaders" 
       :tableContent="categories"
       :defaultItem="objectStructure"
+      dbInstance="/categories"
     ></app-admin-template>
   </div>
 </template>
@@ -26,28 +27,9 @@ export default {
       ],
       categories: [],
       objectStructure: {
-        id: 0,
         name: '',
       }
     }
   },
-  created () {
-    // populate table with data
-    this.initializeData()
-  },
-  methods: {
-    initializeData() {
-      // populate array with items to be displayed in table
-      this.categories = [
-        {
-          id: 1,
-          name: 'Burgere',
-        },
-        // ...
-      ]
-
-      // TODO: pull data from DB
-    },
-  }
 }
 </script>

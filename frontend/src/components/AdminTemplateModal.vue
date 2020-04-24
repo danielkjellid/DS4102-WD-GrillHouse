@@ -8,14 +8,16 @@
         <v-container>
           <v-row>
             <v-col v-for="(item, key, index) in editedItem" :key="index" cols="12">
-              <div v-if="typeof key === 'string' && key != 'image'">
-                <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
-              </div>
-              <div v-else-if="typeof key === 'number'">
-                <v-text-field v-model="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
-              </div>
-              <div v-else-if="typeof key === 'string' && key === 'image'">
-                <v-file-input :label="key.toString()"></v-file-input>
+              <div v-if="key != 'id'">
+                <div v-if="typeof key === 'string' && key != 'image'">
+                  <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
+                </div>
+                <div v-else-if="typeof key === 'number'">
+                  <v-text-field v-model="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
+                </div>
+                <div v-else-if="typeof key === 'string' && key === 'image'">
+                  <v-file-input :label="key.toString()"></v-file-input>
+                </div>
               </div>
             </v-col>
           </v-row>
