@@ -116,11 +116,17 @@ export default {
       // TODO: link up so it puts in DB
     },
     deleteItem(item) {
-      // takes the clicked item and splices (removes) it from array on confirm alert
-      const index = this.tableContent.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.tableContent.splice(index, 1)
+      // takes the clicked item and splices (removes) it from array and DB on confirm alert
+      const confirmDelete = confirm('Er du sikker på at du vil slette "' + item.name + '"?')
 
-      // TODO: link up so it deletes from DB
+      if (confirmDelete) {
+        axios.delete(this.dbInstance + '/' + item.id)
+        .then(() => {
+          // re initialize to make table update
+          this.initializeData()
+        })
+        .catch(error => console.error(error))
+      } 
     },
     savedItem(value) {
       Object.assign(this.tableContent[value.editedIndex], value.editedItem)
