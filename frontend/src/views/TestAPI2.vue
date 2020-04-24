@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     getCategories() {
-      axios.get('https://localhost:5001/categories')
+      axios.get('/categories')
         .then( response => {
           this.categories = response.data
         })
@@ -38,7 +38,7 @@ export default {
         name: this.categoryName
       }
 
-      axios.post('https://localhost:5001/categories', formData)
+      axios.post('/categories', formData)
         .then(result => console.log('In post: ' + result))
         .catch(error => console.log(error))
     }

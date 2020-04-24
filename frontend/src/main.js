@@ -4,8 +4,12 @@ import router from './router/routes'
 import store from './store/store'
 
 import vuetify from './plugins/vuetify';
+import axios from 'axios'
 
 Vue.config.productionTip = false
+
+// set up global axios config
+axios.defaults.baseURL = 'https://localhost:5001'
 
 // set up global filters which is used accross the application
 
