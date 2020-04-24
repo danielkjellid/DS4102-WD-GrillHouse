@@ -20,6 +20,7 @@
                     :active="modalOpen" 
                     :editedIndex="editedIndex"
                     :editedItem="editedItem"
+                    :dbInstance="dbInstance"
                     @saved-item="savedItem"
                     @new-item="newItem"
                     @close-modal="closeModal"
@@ -129,7 +130,8 @@ export default {
     savedItem(value) {
       //Object.assign(this.tableContent[value.editedIndex], value.editedItem)
       axios.put(this.dbInstance, value.editedItem)
-        .then(() => {
+        .then(res => {
+          console.log(res)
           // re initialize to make table update
           this.initializeData()
         })
@@ -138,7 +140,8 @@ export default {
       // post new item to db
       // route of post is set trough dbInstance given by parent
       axios.post(this.dbInstance, value)
-        .then(() => {
+        .then(res => {
+          console.log(res)
           this.initializeData()
         })
         .catch(error => console.error(error))

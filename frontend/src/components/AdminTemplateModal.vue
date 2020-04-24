@@ -16,7 +16,7 @@
                   <v-text-field v-model="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
                 </div>
                 <div v-else-if="typeof key === 'string' && key === 'image'">
-                  <v-file-input :label="key.toString()"></v-file-input>
+                  <v-file-input v-model="files" :label="key.toString()"></v-file-input>
                 </div>
               </div>
             </v-col>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   props: {
     active: {
@@ -48,6 +50,15 @@ export default {
     editedItem: {
       type: Object,
       required: true
+    },
+    dbInstance: {
+      type: String,
+      required: true,
+    }
+  },
+  data() {
+    return {
+      files: [],
     }
   },
   computed: {
@@ -70,14 +81,31 @@ export default {
       // if the item exists, update the item in array with the new data
       if (this.editedIndex > -1) {
         this.$emit('saved-item', {editedIndex: this.editedIndex, editedItem: this.editedItem})
-        // Object.assign(this.tableContent[this.editedIndex], this.editedItem)
+        this.uploadImage()
       // if it doesnt exist, push the editedItem data to the array
       } else {
         this.$emit('new-item', this.editedItem)
+        this.uploadImage()
         //this.tableContent.push(this.editedItem)
       }
       this.close()
     },
+    uploadImage() {
+      // set file name appropriatly in the object
+      this.editedItem.image = this.files.name
+
+      // create new formData instance for API to process
+      let data = new FormData();
+      data.append('file', this.files);
+
+      // upload image to database
+      axios.post(this.dbInstance + '/uploadimage', data, { headers: {'Content-Type': 'multipart/form-data'}})
+        .then(res => {
+          console.log(res)
+          this.files = []
+        })
+
+    }
   },
 
 }
