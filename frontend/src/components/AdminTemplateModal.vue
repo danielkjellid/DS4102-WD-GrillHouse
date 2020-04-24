@@ -77,7 +77,6 @@ export default {
         //this.tableContent.push(this.editedItem)
       }
       this.close()
-      // TODO: link up so it creates in DB
     },
   },
 

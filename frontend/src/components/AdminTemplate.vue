@@ -112,8 +112,6 @@ export default {
       this.editedIndex = this.tableContent.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.modalOpen = true
-
-      // TODO: link up so it puts in DB
     },
     deleteItem(item) {
       // takes the clicked item and splices (removes) it from array and DB on confirm alert
@@ -129,7 +127,12 @@ export default {
       } 
     },
     savedItem(value) {
-      Object.assign(this.tableContent[value.editedIndex], value.editedItem)
+      //Object.assign(this.tableContent[value.editedIndex], value.editedItem)
+      axios.put(this.dbInstance, value.editedItem)
+        .then(() => {
+          // re initialize to make table update
+          this.initializeData()
+        })
     },
     newItem(value) {
       // post new item to db
@@ -152,7 +155,3 @@ export default {
   },
 }
 </script>
-
-<style>
-
-</style>
