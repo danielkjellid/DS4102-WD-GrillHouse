@@ -4,7 +4,6 @@
       pageTitle="Kategorier" 
       pageMainAction="Ny kateogri" 
       :tableHeaders="categoryHeaders" 
-      :tableContent="categories"
       :defaultItem="objectStructure"
       dbInstance="/categories"
     ></app-admin-template>
@@ -25,7 +24,6 @@ export default {
         { text: 'Navn', value: 'name', sortable: false },
         { text: 'Handlinger', value: 'actions', sortable: false },
       ],
-      categories: [],
       objectStructure: {
         name: '',
       }

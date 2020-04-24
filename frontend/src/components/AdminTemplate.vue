@@ -74,10 +74,6 @@ export default {
       type: Array,
       required: true
     },
-    tableContent: {
-      type: Array,
-      required: true
-    },
     defaultItem: {
       type: Object,
       required: true
@@ -92,6 +88,7 @@ export default {
       modalOpen: false,
       editedIndex: -1,
       editedItem: {},
+      tableContent: [],
     }
   },
   created() {
