@@ -10,15 +10,15 @@
       </div>
       <div class="menu-item__meta">
         <div>
-          <p class="menu-item__meta-desc">{{ product.desc }}</p>
+          <p class="menu-item__meta-desc">{{ product.description }}</p>
           <div class="menu-item__meta-reviews">
             <!-- component to show star rating and color stars dynamically -->
-            <app-review-stars :starValue="product.starValue"></app-review-stars>
-            <span class="menu-item__meta-reviews-amount">{{ product.amountOfReviews }} anmeldelser</span>
+            <app-review-stars :starValue="4"></app-review-stars>
+            <span class="menu-item__meta-reviews-amount">27 anmeldelser</span>
           </div>
         </div>
         <div>
-          <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/' + product.image)" max-height="65px" max-width="100px"></v-img>
+          <v-img class="menu-item__meta-img" :src="'https://localhost:5001/images/' + product.image" max-height="65px" max-width="100px"></v-img>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@ export default {
     activateItemModal(object) {
       // emit event to parent so it can control data state 
       this.$emit('activate-item-modal', object.id);
-    }
+    },
   }
 }
 </script>

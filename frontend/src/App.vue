@@ -36,7 +36,6 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('initProducts')
     this.$store.dispatch('initReviews')
   }
 };

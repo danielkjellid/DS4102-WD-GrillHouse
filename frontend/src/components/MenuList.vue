@@ -4,7 +4,7 @@
     <h1 class="menu-list__header">{{ title }}</h1>
     <div class="menu-list__content">
       <!-- use vuetify grid system -->
-      <v-row dense justify="space-around">
+      <v-row dense justify="start">
         <slot name="menu-items">
           <!-- menu items -->
         </slot>

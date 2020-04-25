@@ -21,14 +21,26 @@ namespace API.controllers {
       _hosting = hosting;
     }
 
+    // get methods
+    [HttpGet]
+
     // method for getting a list of all products
     public async Task<IEnumerable<Product>> Get() {
       List<Product> ProductList = await _context.Product.ToListAsync();
       return ProductList;
     }
 
-    // method for posting normal entity to DB
+    [HttpGet("{id}")]
+    // method for getting a product based on given ID
+    public async Task<Product> Get(int id) {
+      Product product = await _context.Product.FirstOrDefaultAsync(product => product.Id == id);
+      return product;
+    }
+
+    // post methods
     [HttpPost]
+
+    // method for posting normal entity to DB
     public async Task<Product> Post(Product product) {
       _context.Product.Add(product);
       await _context.SaveChangesAsync();
@@ -44,19 +56,23 @@ namespace API.controllers {
         }
     }
 
-    // method for updating entity in database
+    // put methods
     [HttpPut]
+
+    // method for updating entity in database
     public async Task<Product> Put(Product product) {
       _context.Update(product);
       await _context.SaveChangesAsync();
       return product;
     }
 
-    // method for deleting entity from database
+    // delete methods 
     [HttpDelete("{id}")]
+
+    // method for deleting entity from database
     public async Task<Product> Delete(int id) {
       // find appropriate record based in id
-      Product productToDelete = await _context.Product.FirstAsync( product => product.Id == id);
+      Product productToDelete = await _context.Product.FirstAsync(product => product.Id == id);
 
       // delete from DB
       _context.Product.Remove(productToDelete);

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.FileProviders.Physical;
 
 using Microsoft.EntityFrameworkCore;
 using API.Models;
@@ -51,7 +52,11 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
             
+            // enables the API to accept uploaded files
             app.UseStaticFiles();
+            
+            // set the API so that files can be accessed directly
+            app.UseDirectoryBrowser();
 
             // enable cors policy defined in ConfigureServices
             app.UseCors("AllowAnyOrigin");

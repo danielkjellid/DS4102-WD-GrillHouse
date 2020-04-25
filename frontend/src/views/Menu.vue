@@ -18,8 +18,9 @@
         </v-col>
       </template>
     </app-menu-list>
+    
     <app-menu-item-modal 
-      :product="getProduct(selectedProductId)" 
+      :product="selectedProduct" 
       @close-modal="itemModalActive = false" 
       :active="itemModalActive"
     >
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 // App imports (components without logic and dependancy)
 import HeaderImage from '../components/AppHeaderImage'
 
@@ -49,24 +52,31 @@ export default {
   data() {
     return {
       itemModalActive: false,
-      // chose product with id 1 as default to prevent undefined error
-      // works because the value is reset upon item click anyways
-      selectedProductId: 1,
+      products: [],
+      selectedProduct: {},
     }
   },
-  computed: {
-    products() {
-      return this.$store.getters.getProducts
-    },
-  },
   methods: {
+    intializeData() {
+      axios.get('/products')
+        .then(res => {
+          this.products = res.data
+        })
+    },
     getProduct(id) {
-      return this.$store.getters.getProduct(id)
+      axios.get('/products/' + id)
+        .then(res => {
+          this.selectedProduct = res.data
+        })
     },
     activateModal(productId) {
       this.itemModalActive = true
       this.selectedProductId = productId
+      this.getProduct(productId)
     }
+  },
+  created() {
+    this.intializeData()
   }
 }
 </script>

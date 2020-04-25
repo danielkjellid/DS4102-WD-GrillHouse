@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { productData } from '../data/products'
 import { reviewData } from '../data/reviews'
 
 Vue.use(Vuex)
@@ -15,9 +14,6 @@ export default new Vuex.Store({
     deliveryActive: true
   },
   mutations: {
-    'INIT_PRODUCTS'(state, products) {
-      state.products = products
-    },
     'INIT_CART'(state, cart) {
       state.cart = cart
     },
@@ -66,9 +62,6 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    initProducts: ({ commit }) => {
-      commit('INIT_PRODUCTS', productData)
-    },
     initReviews: ({ commit }) => {
       commit("INIT_REVIEWS", reviewData)
     },
