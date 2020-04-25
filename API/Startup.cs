@@ -51,7 +51,9 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
             
-            // enable cord policy defined in ConfigureServices
+            app.UseStaticFiles();
+
+            // enable cors policy defined in ConfigureServices
             app.UseCors("AllowAnyOrigin");
 
             app.UseHttpsRedirection();

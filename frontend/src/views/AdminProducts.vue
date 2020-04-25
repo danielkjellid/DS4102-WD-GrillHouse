@@ -4,8 +4,8 @@
       pageTitle="Produkter" 
       pageMainAction="Nytt produkt" 
       :tableHeaders="productHeaders" 
-      :tableContent="products"
       :defaultItem="objectStructure"
+      dbInstance="/products"
     ></app-admin-template>
   </div>
 </template>
@@ -25,41 +25,16 @@ export default {
         { text: 'Navn', value: 'name', sortable: false },
         { text: 'Beskrivelse', value: 'description', sortable: false },
         { text: 'Pris', value: 'price' },
-        { text: 'Vurdering', value: 'assesment' },
         { text: 'Handlinger', value: 'actions', sortable: false },
       ],
-      products: [],
       objectStructure: {
-        id: 0,
         name: '',
+        price: 100.00,
         description: '',
-        price: 0,
         image: '',
-        assesment: 0,
+        categoryId: 1
       }
     }
   },
-  created () {
-    // populate table with data
-    this.initializeData()
-  },
-  methods: {
-    initializeData() {
-      // populate array with items to be displayed in table
-      this.products = [
-        {
-          id: 1,
-          name: 'Cheese',
-          description: 'Burger av 150g høyrygg av okse, med salat, ost, rødløk, tomat.',
-          price: 109.00,
-          image: '',
-          assesment: 3,
-        },
-        // ...
-      ]
-
-      // TODO: pull data from DB
-    },
-  }
 }
 </script>

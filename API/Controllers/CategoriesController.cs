@@ -38,10 +38,10 @@ namespace API.controllers {
       return category;
     }
 
-    // method for deleting entity fra database
+    // method for deleting entity from database
     [HttpDelete("{id}")]
     public async Task<Category> Delete(int id) {
-      // find appropriate record base on ID
+      // find appropriate record based on ID
       Category categoryToDelete = await _context.Category.FirstAsync( category => category.Id == id);
       
       // delete from DB
