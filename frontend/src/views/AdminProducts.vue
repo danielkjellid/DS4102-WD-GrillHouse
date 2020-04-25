@@ -29,7 +29,7 @@ export default {
       ],
       objectStructure: {
         name: '',
-        price: 100.00,
+        price: 0.00,
         description: '',
         image: '',
         categoryId: 1

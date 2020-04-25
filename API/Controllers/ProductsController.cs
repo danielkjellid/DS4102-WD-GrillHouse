@@ -44,19 +44,6 @@ namespace API.controllers {
         }
     }
 
-    // method for saving images to the wwwroot/images folder
-    /*
-    [HttpPost]
-    [Route("[action]")]
-    public void SaveImage(IFormFile file) {
-      string webrootpath = _hosting.WebRootPath;
-      string absolutepath = Path.Combine($"{webrootpath}/images/{file.FileName}");
-
-      using (var filesteam = new FileStream(absolutepath, FileMode.Create)) {
-        file.CopyTo(filesteam);
-      }
-    }*/
-
     // method for updating entity in database
     [HttpPut]
     public async Task<Product> Put(Product product) {

@@ -81,12 +81,20 @@ export default {
       // if the item exists, update the item in array with the new data
       if (this.editedIndex > -1) {
         this.$emit('saved-item', {editedIndex: this.editedIndex, editedItem: this.editedItem})
-        this.uploadImage()
+
+        // only run uploadImage method if there is actual files to upload
+        if (this.files.length > 0) {
+          this.uploadImage()
+        }
+  
       // if it doesnt exist, push the editedItem data to the array
       } else {
         this.$emit('new-item', this.editedItem)
-        this.uploadImage()
-        //this.tableContent.push(this.editedItem)
+
+        // only run uploadImage method if there is actual files to upload
+        if (this.files.length > 0) {
+          this.uploadImage()
+        }
       }
       this.close()
     },
@@ -104,7 +112,6 @@ export default {
           console.log(res)
           this.files = []
         })
-
     }
   },
 
