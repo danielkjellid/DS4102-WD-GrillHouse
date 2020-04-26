@@ -1,72 +1,71 @@
-<!-- template component for all admin pages -->
+<!-- template component for creating a section in /admin -->
 <!-- creates table, populate it, and add new item/edit item modal -->
 <template>
   <div>
-    <the-admin-header></the-admin-header>
-    <v-content class="pa-10">
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="start">
-          <v-col>
-            <h1 class="headline mb-5">{{ pageTitle }}</h1>
-            <!-- create table and populate it with data sent from parent -->         
-            <v-data-table :headers="tableHeaders" :items="tableContent" sort-by="id" class="elevation-1">
-              <template #top>
-                <v-toolbar flat color="white">
-                  <v-spacer></v-spacer>
-                  <!-- button that activates modal, labled as main page action -->
-                  <v-btn @click.stop="modalOpen = true" color="primary" dark class="mb-2">{{ pageMainAction }}</v-btn>
-                  <!-- modal that allows you to edit or create a new item -->
-                  <app-admin-template-modal 
-                    :active="modalOpen" 
-                    :editedIndex="editedIndex"
-                    :editedItem="editedItem"
-                    :dbInstance="dbInstance"
-                    @saved-item="savedItem"
-                    @new-item="newItem"
-                    @close-modal="closeModal"
-                  >
-                  </app-admin-template-modal>
-                </v-toolbar>
-              </template>
-              <!-- item sepcific delete and edit actions -->
-              <template #item.actions="{ item }">
-                <v-icon small class="mr-2" @click="editItem(item)">
-                  mdi-pencil
-                </v-icon>
-                <v-icon small @click="deleteItem(item)">
-                  mdi-delete
-                </v-icon>
-              </template>
-              <!-- if there are no data, display message -->
-              <template #no-data>
-                <p>Ingen data funnet</p>
-              </template>
-            </v-data-table>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
+    <div>
+      <h1 class="headline mb-5">{{ sectionTitle }}</h1>
+      <!-- create table and populate it with data sent from parent -->         
+      <v-data-table :headers="tableHeaders" :items="tableContent" sort-by="id" class="elevation-1">
+        <template #top>
+          <v-toolbar flat color="white">
+            <v-spacer></v-spacer>
+            <!-- button that activates modal, labled as main section action -->
+            <v-btn @click.stop="modalOpen = true" color="primary" dark class="mb-2">{{ sectionMainAction }}</v-btn>
+            <!-- modal that allows you to edit or create a new item -->
+            <app-admin-section-modal 
+              :active="modalOpen" 
+              :editedIndex="editedIndex"
+              :editedItem="editedItem"
+              :dbInstance="dbInstance"
+              @saved-item="savedItem"
+              @new-item="newItem"
+              @close-modal="closeModal"
+            >
+            </app-admin-section-modal>
+          </v-toolbar>
+        </template>
+        <!-- item sepcific delete and edit actions -->
+        <template #item.actions="{ item }">
+          <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="deleteItem(item)">
+            mdi-delete
+          </v-icon>
+        </template>
+        <!-- if there are no data, display message -->
+        <template #no-data>
+          <p>Ingen data funnet</p>
+        </template>
+      </v-data-table>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 
-import TheAdminHeader from '../layout/TheAdminHeader'
-import AdminTemplateModal from './AdminTemplateModal'
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+import AdminSectionModal from './AdminSectionModal'
 
 export default {
+  name: 'AdminSection',
   components: {
-    'the-admin-header': TheAdminHeader,
-    'app-admin-template-modal': AdminTemplateModal
+    'app-admin-section-modal': AdminSectionModal
   },
   props: {
-    pageTitle: {
+    sectionTitle: {
       type: String,
       required: true,
       default: 'Page title'
     },
-    pageMainAction: {
+    sectionMainAction: {
       type: String,
       required: true,
       default: 'Page main action button'

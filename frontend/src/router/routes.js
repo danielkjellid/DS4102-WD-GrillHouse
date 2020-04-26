@@ -25,29 +25,13 @@ Vue.use(VueRouter)
     component: Checkout
   },
 
-  // we lazy load all components behind the /admin route
+  // we lazy load the /admin route
   // in a real life application only a selected few will have access to this part of the app
   // therefore we can reduce load time and bundly size by lazy loading
-  // admin routes are not nested as you cant lazily load route children (yet)
   {
     path: '/admin',
-    name: 'AdminProducts',
-    component: () => import (/* webpackChunkName: "AdminProducts" */ '../views/AdminProducts'),
-  },
-  {
-    path: '/admin/categories',
-    name: 'AdminCategories',
-    component: () => import (/* webpackChunkName: "AdminProducts" */ '../views/AdminCategories'),
-  },
-  {
-    path: '/testapi',
-    name: 'TestAPI',
-    component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI.vue')
-  },
-  {
-    path: '/testapi2',
-    name: 'TestAPI2',
-    component: () => import(/* webpackChunkName: "testapi" */ '../views/TestAPI2.vue')
+    name: 'Admin',
+    component: () => import (/* webpackChunkName: "AdminProducts" */ '../views/Admin'),
   },
 ]
 

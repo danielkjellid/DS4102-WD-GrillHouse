@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ludvi\\Documents\\Webutvikling\\DS4102-WD-GrillHouse\\API\\API.csproj": {}
+    "/Users/danielkjellid/Documents/School/DS4102 - Webutvikling 2/eksamen/API/API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ludvi\\Documents\\Webutvikling\\DS4102-WD-GrillHouse\\API\\API.csproj": {
+    "/Users/danielkjellid/Documents/School/DS4102 - Webutvikling 2/eksamen/API/API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ludvi\\Documents\\Webutvikling\\DS4102-WD-GrillHouse\\API\\API.csproj",
+        "projectUniqueName": "/Users/danielkjellid/Documents/School/DS4102 - Webutvikling 2/eksamen/API/API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\ludvi\\Documents\\Webutvikling\\DS4102-WD-GrillHouse\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\ludvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ludvi\\Documents\\Webutvikling\\DS4102-WD-GrillHouse\\API\\obj\\",
+        "projectPath": "/Users/danielkjellid/Documents/School/DS4102 - Webutvikling 2/eksamen/API/API.csproj",
+        "packagesPath": "/Users/danielkjellid/.nuget/packages/",
+        "outputPath": "/Users/danielkjellid/Documents/School/DS4102 - Webutvikling 2/eksamen/API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ludvi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/danielkjellid/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.201/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -16,14 +16,51 @@
                 <template #panel-blocks>
                   <app-panel-item blockTitle="Dine opplysninger">
                     <template #block-content>
-                      <!-- block with info about the user making the order -->
-                      <div class="checkout__panel-block-content-info-box">
-                        <div>
-                          <p class="checkout__panel-block-content-info-box-text">Fornavn Etternavn</p>
-                          <p class="checkout__panel-block-content-info-box-subtext">Adressegate 1, 0123 Oslo</p>
-                          <p class="checkout__panel-block-content-info-box-subtext">fornavn.etternavn@example.com &#8226; +47 123 45 678</p>
+                      <!-- check if form is set to open -->
+                      <!-- if it isnt, display summary of order details -->
+                      <div v-if="!formActive">
+                        <!-- block with info about the user making the order -->
+                        <div class="checkout__panel-block-content-info-box">
+                          <div>
+                            <p class="checkout__panel-block-content-info-box-text">{{ userFullname }}</p>
+                            <p class="checkout__panel-block-content-info-box-subtext">{{ userAddress }}</p>
+                            <p class="checkout__panel-block-content-info-box-subtext">f{{ userContact }}</p>
+                          </div>
+                          <button @click="formActive = true" class="checkout__panel-block-content-info-box-btn">Endre</button>
                         </div>
-                        <button class="checkout__panel-block-content-info-box-btn">Endre</button>
+                      </div>
+                      <!-- if form is active, allow user to edit info -->
+                      <div v-else>
+                        <v-row>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.firstname" color="#4633e8" label="Fornavn" outlined></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.lastname" color="#4633e8" label="Etternavn" outlined></v-text-field>                            
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.email" color="#4633e8" label="E-post" outlined></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.phone" color="#4633e8" label="Mobilnummer" outlined counter="8"></v-text-field>                            
+                          </v-col>
+                        </v-row>
+                        <v-row no-gutters>
+                          <v-col cols="12">
+                            <v-text-field v-model="user.address.street" color="#4633e8" label="Gate" outlined></v-text-field>
+                          </v-col>
+                        </v-row>
+                        <v-row>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.address.zip" color="#4633e8" label="Postkode" outlined></v-text-field>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-text-field v-model="user.address.city" color="#4633e8" label="By" outlined></v-text-field>                            
+                          </v-col>
+                        </v-row>
+                        <app-btn-primary @click.native="formActive = false" :disabled="!formActive" :buttonText="'Bekreft endringer'" width="100%"></app-btn-primary>
                       </div>
                     </template>
                   </app-panel-item>
@@ -35,7 +72,7 @@
                   </app-panel-item>
                   <app-panel-item>
                     <template #block-content>
-                      <app-btn-primary :buttonText="'Bekreft og betal bestillingen'" width="100%"></app-btn-primary>
+                      <app-btn-primary :disabled="formActive" :buttonText="'Bekreft og betal bestillingen'" width="100%"></app-btn-primary>
                     </template>
                   </app-panel-item>
                 </template>
@@ -100,13 +137,49 @@ export default {
   },
   data() {
     return {
-      radios: 'radio-1'
+      user: {
+        firstname: 'Ola',
+        lastname: 'Nordman',
+        email: 'ola.nordman@example.com',
+        phone: '12345678',
+        address: {
+          street: 'Adressegate 1',
+          zip: 1023,
+          city: 'Oslo',
+        }
+      },
+      radios: 'radio-1',
+      formActive: false,
     }
   },
   computed: {
     cart() {
       return this.$store.getters.getCart
+    },
+    userFullname() {
+      return this.user.firstname + ' ' + this.user.lastname
+    },
+    userAddress() {
+      return this.user.address.street + ', ' + this.user.address.zip + ' ' + this.user.address.city
+    },
+    userContact() {
+      return this.user.email + ' • ' + this.formattedPhone()
     }
+  },
+  methods: {
+    // metod to format phone so it displays the phone number using european convention -->
+    formattedPhone() {
+      // clean the string
+      const cleaned = ('' + this.user.phone).replace(/\D/g, '')
+      // split number into bolks
+      const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})$/)
+  
+      if (match) {
+        return '+47 ' + match[1] + ' ' + match[2] + ' ' + match[3]
+      }
+
+      return null
+    },
   }
 }
 </script>
@@ -119,13 +192,13 @@ export default {
   }
 
   .checkout__panel-block-content-cart {
-    border-bottom: 1px solid #E9EEF4;
+    border-bottom: 1px solid #e9eef4;
     padding-bottom: 1.5rem;
     margin-bottom: 1.25rem;
   }
 
   .checkout__panel-block-content-info-box {
-    border: 1px solid #E9EEF4;
+    border: 1px solid #e9eef4;
     padding: 0.875rem 0.875rem 0.875rem 0.875rem;
     border-radius: 4px;
     display: flex;
@@ -136,7 +209,7 @@ export default {
   .checkout__panel-block-content-info-box-text {
     font-weight: 500;
     font-size: 0.875rem;
-    color: #2D3748;
+    color: #2d3748;
     margin-bottom: 0.5rem !important;
   }
 
@@ -147,9 +220,8 @@ export default {
   }
 
   .checkout__panel-block-content-info-box-btn {
-    color: #4633E8;
+    color: #4633e8;
     font-size: 0.875rem;
     font-weight: 500;
   }
-
 </style>
