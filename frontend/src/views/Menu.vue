@@ -9,16 +9,22 @@
       <v-tab>Drikke</v-tab>
     </v-tabs>
     <!-- display section list based on categories -->
-    <app-menu-list :title="'Burgere'">
-      <!-- target MenuList slot to inject MenuItems -->
-      <template #menu-items>
-        <!-- use vuetifys grid system to oganize menuitems -->
-        <v-col sm="6" cols="12"  v-for="product in products" :key="product.id">
-          <app-menu-item @activate-item-modal="activateModal" :product="product"></app-menu-item>
-        </v-col>
-      </template>
-    </app-menu-list>
-    
+    <div v-for="category in filteredCategories" :key="category.id">
+      <app-menu-list :title="category.name">
+        <!-- target MenuList slot to inject MenuItems -->
+        <template #menu-items>
+          <div v-for="product in products" :key="product.id">
+            <div v-if="product.categoryId === category.id">
+              <!-- use vuetifys grid system to oganize menuitems -->
+              <v-col sm="6" cols="12">
+                <app-menu-item @activate-item-modal="activateModal" :product="product"></app-menu-item>
+              </v-col>
+            </div>
+          </div>
+        </template>
+      </app-menu-list>
+    </div>
+
     <app-menu-item-modal 
       :product="selectedProduct" 
       @close-modal="itemModalActive = false" 
@@ -57,6 +63,12 @@ export default {
     products() {
       return this.$store.getters.getProducts
     },
+    categories() {
+      return this.$store.getters.getCategories
+    },
+    filteredCategories() {
+      return this.categories.filter(category => this.products.find(product => category.id === product.categoryId))
+    },
   },
   methods: {
     activateModal(productId) {
@@ -65,9 +77,6 @@ export default {
       this.itemModalActive = true
     }
   },
-  created() {
-    //this.intializeData()
-  }
 }
 </script>
 
