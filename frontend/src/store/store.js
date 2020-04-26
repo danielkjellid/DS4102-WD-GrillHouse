@@ -135,7 +135,7 @@ export default new Vuex.Store({
       return state.reviews
     },
     getProductReviews: (state) => (id) => {
-      return state.reviews.filter((review) => review.productId === id)
+      return state.reviews.filter((review) => review.menuItemId === id)
     }
   }
 })

@@ -10,7 +10,7 @@
     <div class="review__content">
       <p class="review__content-name">Fornavn Etternavn</p>
       <p class="review__content-review">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet mauris in nulla vehicula interdum.
+        {{ this.reviews }}
       </p>
       <app-review-stars :starValue="4"></app-review-stars>
       <span class="review__content-timestamp">4 dager siden</span>
@@ -32,6 +32,17 @@ export default {
   name: 'ReviewItem',
   components: {
     'app-review-stars': ReviewStars
+  },
+  props: {
+    reviews: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    getReviews() {
+      return this.reviews = this.$store.getters.getReviews;
+    }
   }
 }
 </script>
