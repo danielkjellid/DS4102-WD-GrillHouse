@@ -102,7 +102,7 @@
     <!-- if the cart is empty, there is no need to display the checkout process -->
     <!-- instead we display a 404 with the option of returning to menu -->
     <div v-else>
-      <app-404></app-404>
+      <app-404 message="Du har ikke noen varer i handlekruven."></app-404>
     </div>
   </div>
 </template>

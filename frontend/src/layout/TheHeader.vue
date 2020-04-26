@@ -9,11 +9,13 @@
     </router-link>
     <v-spacer></v-spacer>
     <div class="header__nav">
-      <router-link to="/" class="header__nav-button">
+      <router-link to="/admin" class="header__nav-button">
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="header__nav-icon">
           <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
         </svg>
-        <a class="header__nav-link">Admin</a>
+      </router-link>
+      <router-link to="/admin" class="header__nav-link">
+        Admin
       </router-link>
       <!-- open comporessed cart on smaller devices -->
       <button @click="toggleCart" class="header__nav-button">
@@ -106,7 +108,7 @@ export default {
     }
 
     .header__nav-link {
-      display: block;
+      display: block !important;
     }
   }
 </style>
