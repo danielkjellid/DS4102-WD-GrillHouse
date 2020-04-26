@@ -16,7 +16,8 @@
                   <v-text-field v-model.number="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
                 </div>
                 <div v-else-if="typeof editedItem[key] === 'string' && key === 'image'">
-                  <v-file-input v-model="files" :label="key.toString()"></v-file-input>
+                  <p v-if="editedItem[key] != ''">Bilde i bruk: {{ editedItem[key] }}</p>
+                  <v-file-input v-model="files" :label="key.toString()" :placeholder="files.name"></v-file-input>
                 </div>
               </div>
             </v-col>
@@ -83,7 +84,7 @@ export default {
         this.$emit('saved-item', {editedIndex: this.editedIndex, editedItem: this.editedItem})
 
         // only run uploadImage method if there is actual files to upload
-        if (this.files.name != '') {
+        if (this.files.name != null) {
           this.uploadImage()
         }
   
@@ -93,7 +94,7 @@ export default {
         this.$emit('new-item', this.editedItem)
 
         // only run uploadImage method if there is actual files to upload
-        if (this.files.name != '') {
+        if (this.files.name != null) {
           this.uploadImage()
         }
       }
@@ -101,7 +102,9 @@ export default {
     },
     uploadImage() {
       // set file name appropriatly in the object
-      this.editedItem.image = this.files.name
+      if(this.editedItem.image === '') {
+        this.editedItem.image = this.files.name
+      }
 
       // create new formData instance for API to process
       

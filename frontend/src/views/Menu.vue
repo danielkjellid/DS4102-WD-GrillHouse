@@ -24,7 +24,6 @@
         </template>
       </app-menu-list>
     </div>
-
     <app-menu-item-modal 
       :product="selectedProduct" 
       @close-modal="itemModalActive = false" 
@@ -66,6 +65,8 @@ export default {
     categories() {
       return this.$store.getters.getCategories
     },
+    // filter through categories so that we only loop through "used" categories
+    // categories with no associated items will be left out of loop
     filteredCategories() {
       return this.categories.filter(category => this.products.find(product => category.id === product.categoryId))
     },
