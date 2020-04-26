@@ -12,9 +12,9 @@
         <div class="modal__header-info">
           <h2 class="modal__header-info-title">{{ product.name }}</h2>
           <!-- component that shows and color stars dynamically -->
-          <app-review-stars :starValue="product.starValue"></app-review-stars>
+          <app-review-stars :starValue="4"></app-review-stars>
         </div>
-        <p class="modal__header-desc">{{ product.desc }}</p>
+        <p class="modal__header-desc">{{ product.description }}</p>
         <p class="modal__header-price">{{ product.price | formatPrice | nokPrefix }}</p>
       </div>
       <div class="modal__content">
