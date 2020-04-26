@@ -1,7 +1,7 @@
 <!-- component to display a secondary button -->
 <!-- app component, does not contain logic or have dependancies -->
 <template>
-  <v-btn :width="width" link dark :color="'#4633E8'" :elevation="0">{{ buttonText }}</v-btn>
+  <v-btn :disabled="disabled" :width="width" link class="white--text" :color="'#4633E8'" :elevation="0">{{ buttonText }}</v-btn>
 </template>
 
 <script>
@@ -26,6 +26,11 @@ export default {
       required: false,
       default: 'auto'
     },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
   }
 }
 </script>

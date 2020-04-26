@@ -11,12 +11,16 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
-  props: {
-    source: String,
-  },
-  data: () => ({
-    drawer: false,
-  }),
+  name: 'TheAdminHeader',
 }
 </script>

@@ -1,24 +1,27 @@
+<!-- view that allows admins to perform CRUD in api objects -->
 <template>
   <div>
     <v-content class="pa-10">
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="start">
           <v-col>
-            <app-admin-template 
+            <!-- section to display categories -->
+            <app-admin-section 
               sectionTitle="Kategorier" 
               sectionMainAction="Ny kateogri" 
               :tableHeaders="categoryHeaders" 
               :defaultItem="categoryStructure"
               dbInstance="/categories"
-            ></app-admin-template>
-            <app-admin-template 
+            ></app-admin-section>
+            <!-- section to display products -->
+            <app-admin-section 
               class="mt-12"
               sectionTitle="Produkter" 
               sectionMainAction="Nytt produkt" 
               :tableHeaders="productHeaders" 
               :defaultItem="productStructure"
               dbInstance="/products"
-            ></app-admin-template>
+            ></app-admin-section>
           </v-col>
         </v-row>
       </v-container>
@@ -28,13 +31,20 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
 import TheAdminHeader from '../layout/TheAdminHeader'
-import AdminTemplate from '../components/AdminTemplate'
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+import AdminSection from '../components/AdminSection'
 
 export default {
+  name: 'Admin',
   components: {
     'the-admin-header': TheAdminHeader,
-    'app-admin-template': AdminTemplate
+    'app-admin-section': AdminSection
   },
   data() {
     return {

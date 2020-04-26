@@ -1,4 +1,4 @@
-<!-- template component for all admin pages -->
+<!-- template component for creating a section in /admin -->
 <!-- creates table, populate it, and add new item/edit item modal -->
 <template>
   <div>
@@ -12,7 +12,7 @@
             <!-- button that activates modal, labled as main section action -->
             <v-btn @click.stop="modalOpen = true" color="primary" dark class="mb-2">{{ sectionMainAction }}</v-btn>
             <!-- modal that allows you to edit or create a new item -->
-            <app-admin-template-modal 
+            <app-admin-section-modal 
               :active="modalOpen" 
               :editedIndex="editedIndex"
               :editedItem="editedItem"
@@ -21,7 +21,7 @@
               @new-item="newItem"
               @close-modal="closeModal"
             >
-            </app-admin-template-modal>
+            </app-admin-section-modal>
           </v-toolbar>
         </template>
         <!-- item sepcific delete and edit actions -->
@@ -45,11 +45,19 @@
 <script>
 import axios from 'axios'
 
-import AdminTemplateModal from './AdminTemplateModal'
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+import AdminSectionModal from './AdminSectionModal'
 
 export default {
+  name: 'AdminSection',
   components: {
-    'app-admin-template-modal': AdminTemplateModal
+    'app-admin-section-modal': AdminSectionModal
   },
   props: {
     sectionTitle: {

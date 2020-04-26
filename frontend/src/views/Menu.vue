@@ -2,11 +2,7 @@
   <div>
     <app-header-image :imagePathMobile="'header-mobile.jpg'" :imagePathTablet="'header-tablet.jpg'" :imagePathDesktop="'header-desktop.jpg'"></app-header-image>
     <v-tabs color="#4633E8" height="60px" class="page-nav">
-      <v-tab>Burgere</v-tab>
-      <v-tab>Snacks</v-tab>
-      <v-tab>Dip</v-tab>
-      <v-tab>Fries</v-tab>
-      <v-tab>Drikke</v-tab>
+      <v-tab v-for="category in filteredCategories" :key="category.id">{{ category.name }}</v-tab>
     </v-tabs>
     <!-- display section list based on categories -->
     <div v-for="category in filteredCategories" :key="category.id">

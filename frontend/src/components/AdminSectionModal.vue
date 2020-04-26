@@ -1,3 +1,5 @@
+<!-- component do display edit modal when editing/creating new instance in /admin -->
+<!-- dependant on AdminSection -->
 <template>
   <v-dialog :value="active" max-width="500px" @input="close">
     <v-card>
@@ -7,14 +9,17 @@
       <v-card-text>
         <v-container>
           <v-row>
+            <!-- loop through object keys and add fields for user to interact with -->
             <v-col v-for="(item, key, index) in editedItem" :key="index" cols="12">
               <div v-if="key != 'id'">
                 <div v-if="typeof editedItem[key] === 'string' && key != 'image' && key != 'price'">
                   <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
                 </div>
+                <!-- display a special number field for price and categoryId fields -->
                 <div v-else-if="key === 'price' || key === 'categoryId'">
                   <v-text-field v-model.number="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
                 </div>
+                <!-- display a file upload input if the object needs an image -->
                 <div v-else-if="typeof editedItem[key] === 'string' && key === 'image'">
                   <p v-if="editedItem[key] != ''">Bilde i bruk: {{ editedItem[key] }}</p>
                   <v-file-input v-model="files" :label="key.toString()" :placeholder="files.name"></v-file-input>
@@ -36,7 +41,17 @@
 <script>
 import axios from 'axios'
 
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
+  name: 'AdminSectionModal',
   props: {
     active: {
       type: Boolean,
