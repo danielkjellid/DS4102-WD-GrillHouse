@@ -10,7 +10,7 @@
     <div class="review__content">
       <p class="review__content-name">Fornavn Etternavn</p>
       <p class="review__content-review">
-        {{ this.reviews }}
+        God på smak
       </p>
       <app-review-stars :starValue="4"></app-review-stars>
       <span class="review__content-timestamp">4 dager siden</span>
@@ -34,14 +34,14 @@ export default {
     'app-review-stars': ReviewStars
   },
   props: {
-    reviews: {
-      type: Array,
+    review: {
+      type: Object,
       required: true
     }
   },
   methods: {
     getReviews() {
-      return this.reviews = this.$store.getters.getReviews;
+      return this.reviews = this.$store.getters.getReviews
     }
   }
 }
