@@ -57,10 +57,10 @@ export default {
       ],
       productStructure: {
         name: '',
-        price: 0.00,
         description: '',
+        price: 1,
+        categoryId: 1,
         image: '',
-        categoryId: 1
       }
     }
   },

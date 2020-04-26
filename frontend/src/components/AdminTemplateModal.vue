@@ -12,7 +12,7 @@
                 <div v-if="typeof editedItem[key] === 'string' && key != 'image' && key != 'price'">
                   <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
                 </div>
-                <div v-else-if="typeof editedItem[key] === 'number'">
+                <div v-else-if="key === 'price' || key === 'categoryId'">
                   <v-text-field v-model.number="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
                 </div>
                 <div v-else-if="typeof editedItem[key] === 'string' && key === 'image'">
