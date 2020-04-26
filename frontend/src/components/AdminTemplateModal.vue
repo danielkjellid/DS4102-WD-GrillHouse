@@ -9,13 +9,13 @@
           <v-row>
             <v-col v-for="(item, key, index) in editedItem" :key="index" cols="12">
               <div v-if="key != 'id'">
-                <div v-if="typeof key === 'string' && key != 'image'">
+                <div v-if="typeof editedItem[key] === 'string' && key != 'image' && key != 'price'">
                   <v-text-field v-model="editedItem[key]" :label="key.toString()"></v-text-field>
                 </div>
-                <div v-else-if="typeof key === 'number'">
-                  <v-text-field v-model="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
+                <div v-else-if="typeof editedItem[key] === 'number'">
+                  <v-text-field v-model.number="editedItem[key]" :label="key.toString()" type="number"></v-text-field>
                 </div>
-                <div v-else-if="typeof key === 'string' && key === 'image'">
+                <div v-else-if="typeof editedItem[key] === 'string' && key === 'image'">
                   <v-file-input v-model="files" :label="key.toString()"></v-file-input>
                 </div>
               </div>
@@ -83,16 +83,17 @@ export default {
         this.$emit('saved-item', {editedIndex: this.editedIndex, editedItem: this.editedItem})
 
         // only run uploadImage method if there is actual files to upload
-        if (this.files.length > 0) {
+        if (this.files.name != '') {
           this.uploadImage()
         }
   
       // if it doesnt exist, push the editedItem data to the array
       } else {
+
         this.$emit('new-item', this.editedItem)
 
         // only run uploadImage method if there is actual files to upload
-        if (this.files.length > 0) {
+        if (this.files.name != '') {
           this.uploadImage()
         }
       }
@@ -103,6 +104,7 @@ export default {
       this.editedItem.image = this.files.name
 
       // create new formData instance for API to process
+      
       let data = new FormData();
       data.append('file', this.files);
 
@@ -114,6 +116,5 @@ export default {
         })
     }
   },
-
 }
 </script>

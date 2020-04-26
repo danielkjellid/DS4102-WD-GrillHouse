@@ -9,6 +9,5 @@ namespace API.Models {
     // add instances to database
     public DbSet<API.Models.Category> Category { get; set; }
     public DbSet<API.Models.Product> Product { get; set; }
-    public DbSet<API.Models.Payment> Payment { get; set; }
   }
 }

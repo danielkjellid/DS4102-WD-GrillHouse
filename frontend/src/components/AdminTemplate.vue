@@ -140,8 +140,8 @@ export default {
       // post new item to db
       // route of post is set trough dbInstance given by parent
       axios.post(this.dbInstance, value)
-        .then(res => {
-          console.log(res)
+        .then(() => {
+          
           this.initializeData()
         })
         .catch(error => console.error(error))

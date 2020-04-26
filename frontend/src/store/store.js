@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import axios from 'axios'
+
 import { reviewData } from '../data/reviews'
 
 Vue.use(Vuex)
@@ -8,12 +10,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
+    categories: [],
     cart: [],
     reviews: [],
     deliveryPrice: 59,
     deliveryActive: true
   },
   mutations: {
+    'INIT_PRODUCTS' (state, products) {
+      state.products = products
+    },
+    'INIT_CATEGORIES' (state, categories) {
+      state.categories = categories
+    },
     'INIT_CART'(state, cart) {
       state.cart = cart
     },
@@ -62,6 +71,20 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    initProducts: ({ commit }) => {
+        axios.get('/products')
+          .then(res => {
+            commit('INIT_PRODUCTS', res.data)
+          })
+          .catch(error => console.log(error))
+    },
+    initCategories: ({ commit }) => {
+      axios.get('/categories')
+        .then(res => {
+          commit('INIT_CATEGORIES', res.data)
+        })
+        .catch(error => console.log(error))
+    },
     initReviews: ({ commit }) => {
       commit("INIT_REVIEWS", reviewData)
     },
@@ -87,6 +110,9 @@ export default new Vuex.Store({
     },
     getProduct: (state) => (id) => {
       return state.products.find((product) => product.id === id)
+    },
+    getCategories: (state) => {
+      return state.categories
     },
     getCart: (state, getters) => {
 

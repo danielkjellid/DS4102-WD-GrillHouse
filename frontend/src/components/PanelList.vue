@@ -20,13 +20,6 @@
 
 export default {
   name: 'PanelList',
-  props: {
-    panelTitle: {
-      type: String,
-      required: true,
-      default: 'Panel title'
-    }
-  }
 }
 </script>
 
