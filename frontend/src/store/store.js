@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import axios from 'axios'
+
 import { reviewData } from '../data/reviews'
 
 Vue.use(Vuex)
@@ -14,6 +16,9 @@ export default new Vuex.Store({
     deliveryActive: true
   },
   mutations: {
+    'INIT_PRODUCTS' (state, products) {
+      state.products = products
+    },
     'INIT_CART'(state, cart) {
       state.cart = cart
     },
@@ -62,6 +67,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    initProducts: ({ commit }) => {
+        axios.get('/products')
+          .then(res => {
+            commit('INIT_PRODUCTS', res.data)
+          })
+          .catch(error => console.log(error))
+    },
     initReviews: ({ commit }) => {
       commit("INIT_REVIEWS", reviewData)
     },

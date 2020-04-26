@@ -30,9 +30,9 @@ export default {
     return {
       products: [],
       product: {
-        name: '',
+        name: 'test',
         price: 100.00,
-        description: '',
+        description: 'Test desc',
         image: '',
         categoryId: 1
       },

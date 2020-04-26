@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 // App imports (components without logic and dependancy)
 import HeaderImage from '../components/AppHeaderImage'
 
@@ -52,31 +50,23 @@ export default {
   data() {
     return {
       itemModalActive: false,
-      products: [],
-      selectedProduct: {},
+      selectedProduct: {}
     }
   },
+  computed: {
+    products() {
+      return this.$store.getters.getProducts
+    },
+  },
   methods: {
-    intializeData() {
-      axios.get('/products')
-        .then(res => {
-          this.products = res.data
-        })
-    },
-    getProduct(id) {
-      axios.get('/products/' + id)
-        .then(res => {
-          this.selectedProduct = res.data
-        })
-    },
     activateModal(productId) {
-      this.itemModalActive = true
       this.selectedProductId = productId
-      this.getProduct(productId)
+      this.selectedProduct = this.$store.getters.getProduct(productId)
+      this.itemModalActive = true
     }
   },
   created() {
-    this.intializeData()
+    //this.intializeData()
   }
 }
 </script>
