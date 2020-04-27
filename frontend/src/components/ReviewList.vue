@@ -1,7 +1,7 @@
 <!-- component to list reviews related to a menu item -->
 <template>
   <div class="modal__content-reviews">
-    <app-review-item v-for="review in 3" :key="review"></app-review-item>
+    <app-review-item v-for="review in this.$store.getters.getProductReviews(this.productId)" :key="review.id" :review="review"></app-review-item>
   </div>
 </template>
 
@@ -19,6 +19,9 @@ export default {
   name: 'ReviewList',
   components: {
     'app-review-item': ReviewItem,
+  },
+  props: {
+    productId: Number
   }
 }
 </script>

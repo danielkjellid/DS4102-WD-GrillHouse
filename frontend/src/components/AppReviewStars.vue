@@ -1,7 +1,7 @@
 <!-- component to display and color review stars dynamically -->
-<!-- app component, does not contain logic or have dependancies -->
+<!-- app component, does not contain logic or have dependencies -->
 <template>
-  <div class="star__conatainer">
+  <div class="star__container">
     <svg 
       v-for="(star, index) in 5" 
       :key="index" class="star__star" 
@@ -14,10 +14,10 @@
 </template>
 
 <script>
-// App imports (components without logic and dependancy)
+// App imports (components without logic and dependency)
 // -
 
-// General imports (componetns with logic)
+// General imports (components with logic)
 // -
 
 // Module imports (components dependant on this one)

@@ -13,8 +13,8 @@
           <p class="menu-item__meta-desc">{{ product.description }}</p>
           <div class="menu-item__meta-reviews">
             <!-- component to show star rating and color stars dynamically -->
-            <app-review-stars :starValue="4"></app-review-stars>
-            <span class="menu-item__meta-reviews-amount">27 anmeldelser</span>
+            <app-review-stars :starValue="getStarValue()"></app-review-stars>
+            <span class="menu-item__meta-reviews-amount">{{getAmountOfReviews()}}</span>
           </div>
         </div>
         <div>
@@ -52,8 +52,15 @@ export default {
     }
   },
   methods: {
+    getStarValue() {
+      const reviewsForProduct = this.$store.getters.getProductReviews(this.product.id);
+      return reviewsForProduct.reduce((acc, curr) => acc + curr.starValue, 0) / reviewsForProduct.length
+    },
+    getAmountOfReviews() {
+      return this.$store.getters.getProductReviews(this.product.id).length + " anmeldelser";
+    },
     activateItemModal(object) {
-      // emit event to parent so it can control data state 
+      // emit event to parent so it can control data state
       this.$emit('activate-item-modal', object.id);
     },
   }

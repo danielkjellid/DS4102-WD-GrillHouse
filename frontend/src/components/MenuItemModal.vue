@@ -28,16 +28,16 @@
             <!-- if it is, and review is not submitted -->
             <div v-if="!reviewSubmitted">
               <!-- display form -->
-              <app-menu-item-modal-form @close-form="reviewSubmitted = true"></app-menu-item-modal-form>
+              <app-menu-item-modal-form @close-form="reviewSubmitted = true" :product="product"></app-menu-item-modal-form>
             </div>
             <div v-else>
               <!-- if it is submitted, display confirmation message -->
-              <v-alert type="success" text>Anmdelse publisert!</v-alert>
+              <v-alert type="success" text>Anmeldelse publisert!</v-alert>
             </div>
           </div>
         </div>
         <!-- compoent to display reviews associated with the item -->
-        <app-review-list></app-review-list>
+        <app-review-list :productId="product.id"></app-review-list>
       </div>
       <div class="modal__footer">
         <div class="modal__footer-amount-controller">
@@ -107,7 +107,7 @@ export default {
       // reset component data properties
       this.formActive = false;
       this.reviewSubmitted = false;
-
+      console.log(this.product.id)
       // emit change to parent to change data state 
       this.$emit('close-modal')
     },

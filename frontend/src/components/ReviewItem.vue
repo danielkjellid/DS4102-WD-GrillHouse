@@ -8,12 +8,12 @@
       </div>
     </div>
     <div class="review__content">
-      <p class="review__content-name">Fornavn Etternavn</p>
+      <p class="review__content-name">{{review.reviewer}}</p>
       <p class="review__content-review">
-        God på smak
+        {{review.reviewText}}
       </p>
-      <app-review-stars :starValue="4"></app-review-stars>
-      <span class="review__content-timestamp">4 dager siden</span>
+      <app-review-stars :starValue="review.starValue"></app-review-stars>
+      <span class="review__content-timestamp">{{review.timeStamp}}</span>
     </div>
   </div>
 </template>

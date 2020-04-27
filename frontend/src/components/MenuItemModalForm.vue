@@ -3,7 +3,7 @@
 <template>
   <form>
     <div class="form__input">
-      <label class="form__label" for="star-slider">Hvor mange stjerner vil du gi Cheese?</label>
+      <label class="form__label" for="star-slider">Hvor mange stjerner vil du gi {{product.name}}?</label>
       <v-slider
         id="star-slider"
         color="#4C51BF" 
@@ -18,7 +18,7 @@
       </v-slider>
     </div>
     <div class="form__input">
-      <label class="form__label" for="review">Hva synes du om Cheese?</label>
+      <label class="form__label" for="review">Hva synes du om {{product.name}}?</label>
       <textarea v-model="review" id="review" class="form__input-textarea" rows="4"></textarea>
     </div>
     <app-btn-secondary @click.native="submitReview" buttonText="Publiser anmeldelse" width="100%"></app-btn-secondary>
@@ -47,10 +47,20 @@ export default {
       tickLabels: [1, 2, 3, 4, 5]
     }
   },
+  props: {
+    product: Object
+  },
   methods: {
     submitReview() {
-      // TODO: create order
-
+      // object values sent to reviews in state
+      this.$store.dispatch("addReview", {
+        reviewer: "Jonny Burger (Deg)",
+        reviewText: this.review,
+        starValue: this.starValue,
+        timeStamp: new Date(),
+        menuItemId: this.product.id,
+        id: Math.floor(Math.random()*90000) + 100000 // SKRIV ETTE ELLER SANNET
+      });
       // emit change to parent to close down form
       this.$emit('close-form');
     }
