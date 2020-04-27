@@ -12,7 +12,7 @@
         <div class="modal__header-info">
           <h2 class="modal__header-info-title">{{ product.name }}</h2>
           <!-- component that shows and color stars dynamically -->
-          <app-review-stars :starValue="4"></app-review-stars>
+          <app-review-stars :starValue="getStarValue()"></app-review-stars>
         </div>
         <p class="modal__header-desc">{{ product.description }}</p>
         <p class="modal__header-price">{{ product.price | formatPrice | nokPrefix }}</p>
@@ -122,6 +122,10 @@ export default {
       this.$store.dispatch('addToCart', productOrder)
       this.closeModal()
       this.quantity = 1
+    },
+    getStarValue() {
+      const reviewsForProduct = this.$store.getters.getProductReviews(this.product.id);
+      return reviewsForProduct.reduce((acc, curr) => acc + curr.starValue, 0) / reviewsForProduct.length
     }
   }
 }
