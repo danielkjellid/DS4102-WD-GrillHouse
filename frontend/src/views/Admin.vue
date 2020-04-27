@@ -14,13 +14,12 @@
         </v-row>
       </v-container>
     </v-content>
-    <the-admin-header></the-admin-header>
   </div>
 </template>
 
 <script>
 // App imports (components without logic and dependancy)
-import TheAdminHeader from '../layout/TheAdminHeader'
+//
 
 // General imports (componetns with logic)
 // -
@@ -32,7 +31,6 @@ import OrderList from '../components/OrderList'
 export default {
   name: 'Admin',
   components: {
-    'the-admin-header': TheAdminHeader,
     'app-admin-section': AdminSection,
     'app-order-list': OrderList
   },

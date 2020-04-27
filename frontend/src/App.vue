@@ -1,6 +1,11 @@
 <template>
   <v-app class="app">
-    <the-header @toggle-cart="cartActive = !cartActive" :cartActive="cartActive"></the-header>
+    <div v-if="$route.matched.some(({ name }) => name != 'Admin')">
+      <the-header @toggle-cart="cartActive = !cartActive" :cartActive="cartActive"></the-header>
+    </div>
+    <div v-else>
+      <the-admin-header></the-admin-header>
+    </div>
     <!-- (side) cart -->
     <!-- nested inside a navigation drawer to fit propperly with vuetify -->
     <!-- hide sidecart during checkout process -->
@@ -20,6 +25,7 @@
 
 <script>
 import TheHeader from './layout/TheHeader'
+import TheAdminHeader from './layout/TheAdminHeader'
 import TheFooter from './layout/TheFooter'
 import Cart from './components/Cart'
 
@@ -27,6 +33,7 @@ export default {
   name: 'App',
   components: {
     'the-header': TheHeader,
+    'the-admin-header': TheAdminHeader,
     'the-footer': TheFooter,
     'app-cart': Cart
   },
