@@ -135,7 +135,7 @@ export default {
 
   @media only screen and (min-width: 768px){
     .menu-item {
-      width: 357px;
+      width: 344px;
       background-color: #fff;
       border-radius: 6px;
       border-bottom: none;
@@ -145,7 +145,7 @@ export default {
 
   @media only screen and (min-width: 930px){
     .menu-item {
-      width: 430px;
+      width: 425px;
     }
   }
   
@@ -158,13 +158,37 @@ export default {
 
   @media only screen and (min-width: 1180px){
     .menu-item {
-      width: 390px;
+      width: 395px;
     }
   }
 
   @media only screen and (min-width: 1270px){
     .menu-item {
-      width: 430px;
+      width: 445px;
+    }
+  }
+
+  @media only screen and (min-width: 1440px){
+    .menu-item {
+      width: 326px;
+    }
+  }
+
+  @media only screen and (min-width: 1600px){
+    .menu-item {
+      width: 375px;
+    }
+  }
+
+  @media only screen and (min-width: 1680px){
+    .menu-item {
+      width: 405px;
+    }
+  }
+
+  @media only screen and (min-width: 1900px){
+    .menu-item {
+      width: 354px;
     }
   }
 

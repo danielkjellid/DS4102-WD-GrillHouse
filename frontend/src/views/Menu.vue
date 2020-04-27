@@ -12,7 +12,7 @@
           <div v-for="product in products" :key="product.id">
             <div v-if="product.categoryId === category.id">
               <!-- use vuetifys grid system to oganize menuitems -->
-              <v-col sm="6" cols="12">
+              <v-col sm="4" cols="12" xl="3">
                 <app-menu-item @activate-item-modal="activateModal" :product="product"></app-menu-item>
               </v-col>
             </div>
