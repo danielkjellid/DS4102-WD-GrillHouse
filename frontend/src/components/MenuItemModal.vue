@@ -7,7 +7,7 @@
       <v-btn @click="closeModal" class="modal-close" fab dark small color="#fff">
         <v-icon color="#4633E8">mdi-close</v-icon>
       </v-btn>
-      <v-img class="menu-item__meta-img" :src="require('@/assets/images/products/cheese.jpg')" max-height="205px" min-width="100%"></v-img>
+      <v-img class="menu-item__meta-img" :src="'https://localhost:5001/images/' + product.image" max-height="205px" min-width="100%"></v-img>
       <div class="modal__header">
         <div class="modal__header-info">
           <h2 class="modal__header-info-title">{{ product.name }}</h2>
