@@ -64,7 +64,7 @@
     <div class="not-found__text">
       <div>
         <!-- helper text and link back to the main page -->
-        <p class="not-found__text-helper">Denne siden eksisterer ikke dessverre ikke.</p>
+        <p class="not-found__text-helper">{{ message }}</p>
         <router-link to="/" class="not-found__text-link">
           Gå til bake til menyen?
         </router-link>
@@ -85,6 +85,13 @@
 
 export default {
   name: 'NotFound',
+  props: {
+    message: {
+      type: String,
+      required: false,
+      default: 'Denne siden eksisterer ikke dessverre ikke.'
+    }
+  }
 }
 </script>
 
