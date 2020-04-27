@@ -127,7 +127,16 @@ export default {
       } 
     },
     savedItem(value) {
-      //Object.assign(this.tableContent[value.editedIndex], value.editedItem)
+      
+      // clean number inputs so that api dont lose its shit
+      if (value.editedItem.price != '' && value.editedItem.price != undefined) {
+        value.editedItem.price = parseInt(value.editedItem.price)
+      }
+
+      if (value.editedItem.categoryId != '' && value.editedItem.categoryId != undefined) {
+        value.editedItem.categoryId = parseInt(value.editedItem.categoryId)
+      }
+      
       axios.put(this.dbInstance, value.editedItem)
         .then(res => {
           console.log(res)
@@ -138,9 +147,19 @@ export default {
     newItem(value) {
       // post new item to db
       // route of post is set trough dbInstance given by parent
+
+      // clean number inputs so that api dont lose its shit
+      if (value.price != '' && value.price != undefined) {
+        value.price = parseInt(value.price)
+      }
+
+      if (value.categoryId != '' && value.categoryId != undefined) {
+        value.categoryId = parseInt(value.categoryId)
+      }
+
       axios.post(this.dbInstance, value)
-        .then(() => {
-          
+        .then(res => {
+          console.log(res)
           this.initializeData()
         })
         .catch(error => console.error(error))

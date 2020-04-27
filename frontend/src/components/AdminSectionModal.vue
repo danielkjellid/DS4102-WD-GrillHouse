@@ -41,15 +41,6 @@
 <script>
 import axios from 'axios'
 
-// App imports (components without logic and dependancy)
-// -
-
-// General imports (componetns with logic)
-// -
-
-// Module imports (components dependant on this one)
-// -
-
 export default {
   name: 'AdminSectionModal',
   props: {
@@ -96,6 +87,8 @@ export default {
     save () {
       // if the item exists, update the item in array with the new data
       if (this.editedIndex > -1) {
+        
+        console.log(this.editedItem)
         this.$emit('saved-item', {editedIndex: this.editedIndex, editedItem: this.editedItem})
 
         // only run uploadImage method if there is actual files to upload
@@ -105,7 +98,6 @@ export default {
   
       // if it doesnt exist, push the editedItem data to the array
       } else {
-
         this.$emit('new-item', this.editedItem)
 
         // only run uploadImage method if there is actual files to upload
@@ -128,8 +120,7 @@ export default {
 
       // upload image to database
       axios.post(this.dbInstance + '/uploadimage', data, { headers: {'Content-Type': 'multipart/form-data'}})
-        .then(res => {
-          console.log(res)
+        .then(() => {
           this.files = []
         })
     }
