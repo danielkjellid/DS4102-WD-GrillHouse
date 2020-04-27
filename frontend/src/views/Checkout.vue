@@ -24,7 +24,7 @@
                           <div>
                             <p class="checkout__panel-block-content-info-box-text">{{ userFullname }}</p>
                             <p class="checkout__panel-block-content-info-box-subtext">{{ userAddress }}</p>
-                            <p class="checkout__panel-block-content-info-box-subtext">f{{ userContact }}</p>
+                            <p class="checkout__panel-block-content-info-box-subtext">{{ userContact }} {{ user.phone | formatPhone }}</p>
                           </div>
                           <button @click="formActive = true" class="checkout__panel-block-content-info-box-btn">Endre</button>
                         </div>
@@ -72,7 +72,7 @@
                   </app-panel-item>
                   <app-panel-item>
                     <template #block-content>
-                      <app-btn-primary :disabled="formActive" :buttonText="'Bekreft og betal bestillingen'" width="100%"></app-btn-primary>
+                      <app-btn-primary @click.native="confrmOrder" to="/confirmed" :disabled="formActive" :buttonText="'Bekreft og betal bestillingen'" width="100%"></app-btn-primary>
                     </template>
                   </app-panel-item>
                 </template>
@@ -163,23 +163,28 @@ export default {
       return this.user.address.street + ', ' + this.user.address.zip + ' ' + this.user.address.city
     },
     userContact() {
-      return this.user.email + ' • ' + this.formattedPhone()
+      return this.user.email + ' • '
+    },
+    getOrders() {
+      return this.$store.getters.getOrders
     }
   },
   methods: {
-    // metod to format phone so it displays the phone number using european convention -->
-    formattedPhone() {
-      // clean the string
-      const cleaned = ('' + this.user.phone).replace(/\D/g, '')
-      // split number into bolks
-      const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})$/)
-  
-      if (match) {
-        return '+47 ' + match[1] + ' ' + match[2] + ' ' + match[3]
+    confrmOrder() {
+      const cart = this.$store.getters.getCart
+
+      const order = {
+        orderlines: [],
+        user: this.user
       }
 
-      return null
-    },
+      cart.forEach(element => {
+        order.orderlines.push({ productId: element.id, quantity: element.quantity})
+      });
+
+      this.$store.dispatch('addOrder', order)
+      this.$store.dispatch('emptyCart')
+    }
   }
 }
 </script>
@@ -188,7 +193,7 @@ export default {
   .checkout__container {
     max-width: 980px;
     margin: auto;
-    margin-top: -10rem;
+    margin-top: -10rem !important;
   }
 
   .checkout__panel-block-content-cart {

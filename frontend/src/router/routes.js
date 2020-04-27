@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 // views imports
 import Menu from '../views/Menu'
 import Checkout from '../views/Checkout'
+import OrderConfirmed from '../views/OrderConfirmed'
 import PageNotFound from '../views/PageNotFound'
 
 Vue.use(VueRouter)
@@ -23,6 +24,11 @@ Vue.use(VueRouter)
     path: '/checkout',
     name: 'Checkout',
     component: Checkout
+  },
+  {
+    path: '/confirmed',
+    name: 'Confirmed',
+    component: OrderConfirmed
   },
 
   // we lazy load the /admin route

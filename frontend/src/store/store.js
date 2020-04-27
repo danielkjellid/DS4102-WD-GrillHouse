@@ -11,6 +11,8 @@ export default new Vuex.Store({
   state: {
     products: [],
     categories: [],
+    orders: [],
+    fulfillment: [],
     cart: [],
     reviews: [],
     deliveryPrice: 59,
@@ -22,9 +24,6 @@ export default new Vuex.Store({
     },
     'INIT_CATEGORIES' (state, categories) {
       state.categories = categories
-    },
-    'INIT_CART'(state, cart) {
-      state.cart = cart
     },
     'INIT_REVIEWS'(state, reviews) {
       state.reviews = reviews
@@ -68,7 +67,21 @@ export default new Vuex.Store({
 
       // increase amount
       productRecord.quantity += 1
-    }
+    },
+    'EMPTY_CART' (state) {
+      state.cart = []
+    },
+    'ADD_ORDER' (state, { orderlines, user }) {
+
+      const id = state.orders.length + 1
+      
+      state.orders = []
+      state.orders.push({
+        id: id,
+        orderlines: orderlines,
+        user: user
+      })
+    },
   },
   actions: {
     initProducts: ({ commit }) => {
@@ -99,6 +112,12 @@ export default new Vuex.Store({
     },
     increaseCartItemAmount: ({ commit }, order) => {
       commit('INCREASE_CART_ITEM_AMOUNT', order)
+    },
+    emptyCart: ({ commit }) => {
+      commit('EMPTY_CART')
+    },
+    addOrder: ({ commit }, order) => {
+      commit('ADD_ORDER', order)
     },
     addReview: ({ commit }, review) => {
       commit("ADD_REVIEW", review)
@@ -156,6 +175,34 @@ export default new Vuex.Store({
       } else {
         return getters.getSubTotal
       }
+    },
+    getFulfillment: (state, getters) => {
+
+      state.orders.forEach(order => {
+
+        const fulfillment = {
+          id: order.id,
+          orderlines: [],
+          user: order.user
+        }
+
+        order.orderlines.forEach(orderline => {
+          const product = getters.getProducts.find(product => product.id === orderline.productId)
+          const totalPrice = product.price * orderline.quantity
+
+          const productInfo = {
+            quantity: orderline.quantity,
+            name: product.name,
+            price: totalPrice
+          }
+
+          fulfillment.orderlines.push(productInfo)
+        })
+        
+        state.fulfillment.push(fulfillment)
+      })
+      
+      return state.fulfillment
     },
     getReviews: (state) => {
       return state.reviews

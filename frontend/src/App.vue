@@ -1,6 +1,6 @@
 <template>
   <v-app class="app">
-    <the-header @toggle-cart="cartActive = !cartActive"></the-header>
+    <the-header @toggle-cart="cartActive = !cartActive" :cartActive="cartActive"></the-header>
     <!-- (side) cart -->
     <!-- nested inside a navigation drawer to fit propperly with vuetify -->
     <!-- hide sidecart during checkout process -->
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      cartActive: null,
+      cartActive: true,
     }
   },
   created() {

@@ -25,9 +25,7 @@
       <div class="cart__footer-total">
         <app-cart-total></app-cart-total>
       </div>
-      <router-link to="/checkout">
-        <app-btn-primary :buttonText="'Gå til kassen'" width="100%"></app-btn-primary>
-      </router-link>
+      <app-btn-primary to="/checkout" :buttonText="'Gå til kassen'" width="100%"></app-btn-primary>
     </div>
   </div>
 </template>

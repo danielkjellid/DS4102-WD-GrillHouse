@@ -5,23 +5,11 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="start">
           <v-col>
+            <app-order-list></app-order-list>
             <!-- section to display categories -->
-            <app-admin-section 
-              sectionTitle="Kategorier" 
-              sectionMainAction="Ny kateogri" 
-              :tableHeaders="categoryHeaders" 
-              :defaultItem="categoryStructure"
-              dbInstance="/categories"
-            ></app-admin-section>
+            <app-admin-section class="mt-12" sectionTitle="Kategorier" sectionMainAction="Ny kateogri" :tableHeaders="categoryHeaders" :defaultItem="categoryStructure" dbInstance="/categories"></app-admin-section>
             <!-- section to display products -->
-            <app-admin-section 
-              class="mt-12"
-              sectionTitle="Produkter" 
-              sectionMainAction="Nytt produkt" 
-              :tableHeaders="productHeaders" 
-              :defaultItem="productStructure"
-              dbInstance="/products"
-            ></app-admin-section>
+            <app-admin-section class="mt-12" sectionTitle="Produkter" sectionMainAction="Nytt produkt" :tableHeaders="productHeaders" :defaultItem="productStructure" dbInstance="/products"></app-admin-section>
           </v-col>
         </v-row>
       </v-container>
@@ -39,12 +27,14 @@ import TheAdminHeader from '../layout/TheAdminHeader'
 
 // Module imports (components dependant on this one)
 import AdminSection from '../components/AdminSection'
+import OrderList from '../components/OrderList'
 
 export default {
   name: 'Admin',
   components: {
     'the-admin-header': TheAdminHeader,
-    'app-admin-section': AdminSection
+    'app-admin-section': AdminSection,
+    'app-order-list': OrderList
   },
   data() {
     return {

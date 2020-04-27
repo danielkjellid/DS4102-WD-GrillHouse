@@ -31,6 +31,20 @@ Vue.filter('nokPrefix', (value) => {
 
 })
 
+// format phone so it displays the phone number using european convention -->
+Vue.filter('formatPhone', (value) => {
+  // clean the string
+  const cleaned = ('' + value).replace(/\D/g, '')
+  // split number into bolks
+  const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})$/)
+
+  if (match) {
+    return '+47 ' + match[1] + ' ' + match[2] + ' ' + match[3]
+  }
+
+  return null
+})
+
 new Vue({
   router,
   store,
