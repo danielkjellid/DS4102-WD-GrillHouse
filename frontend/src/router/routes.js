@@ -43,6 +43,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
+  // make it available to navigate to page sections trough id's
   scrollBehavior: (to) => {
     if (to.hash) {
       return {selector: to.hash}

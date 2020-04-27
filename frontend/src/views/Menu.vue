@@ -1,3 +1,4 @@
+<!-- view to display a full overview over menu items -->
 <template>
   <div>
     <app-header-image :imagePathMobile="'header-mobile.jpg'" :imagePathTablet="'header-tablet.jpg'" :imagePathDesktop="'header-desktop.jpg'"></app-header-image>
@@ -20,11 +21,7 @@
         </template>
       </app-menu-list>
     </div>
-    <app-menu-item-modal 
-      :product="selectedProduct" 
-      @close-modal="itemModalActive = false" 
-      :active="itemModalActive"
-    >
+    <app-menu-item-modal :product="selectedProduct" @close-modal="itemModalActive = false" :active="itemModalActive">
     </app-menu-item-modal>
   </div>
 </template>
@@ -69,6 +66,7 @@ export default {
   },
   methods: {
     activateModal(productId) {
+      // pass product to modal to display clicked items info based on id
       this.selectedProductId = productId
       this.selectedProduct = this.$store.getters.getProduct(productId)
       this.itemModalActive = true

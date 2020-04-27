@@ -173,15 +173,18 @@ export default {
     confrmOrder() {
       const cart = this.$store.getters.getCart
 
+      // create a structurized objext
       const order = {
         orderlines: [],
         user: this.user
       }
-
+      
+      // push all items in the cart into the order array
       cart.forEach(element => {
         order.orderlines.push({ productId: element.id, quantity: element.quantity})
       });
 
+      // dispatch store actions to add the order and clear the cart
       this.$store.dispatch('addOrder', order)
       this.$store.dispatch('emptyCart')
     }

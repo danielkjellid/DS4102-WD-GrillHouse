@@ -24,10 +24,16 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
 import TheHeader from './layout/TheHeader'
 import TheAdminHeader from './layout/TheAdminHeader'
 import TheFooter from './layout/TheFooter'
+
+// General imports (componetns with logic)
 import Cart from './components/Cart'
+
+// Module imports (components dependant on this one)
+// -
 
 export default {
   name: 'App',
@@ -39,10 +45,11 @@ export default {
   },
   data() {
     return {
-      cartActive: true,
+      cartActive: null,
     }
   },
   created() {
+    // dispatch store actions to initalize review, category in product data
     this.$store.dispatch('initProducts')
     this.$store.dispatch('initCategories')
     this.$store.dispatch('initReviews')

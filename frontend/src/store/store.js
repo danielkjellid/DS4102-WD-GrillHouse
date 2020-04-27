@@ -69,13 +69,18 @@ export default new Vuex.Store({
       productRecord.quantity += 1
     },
     'EMPTY_CART' (state) {
+      // set cart to initial state 
       state.cart = []
     },
     'ADD_ORDER' (state, { orderlines, user }) {
 
+      // assign an id to the new object
       const id = state.orders.length + 1
       
+      // reset the orders array to remove old orders, or else it will duplicate upon creating new ones
       state.orders = []
+
+      // push new object to the orders array
       state.orders.push({
         id: id,
         orderlines: orderlines,
@@ -85,13 +90,19 @@ export default new Vuex.Store({
   },
   actions: {
     initProducts: ({ commit }) => {
-        axios.get('/products')
-          .then(res => {
-            commit('INIT_PRODUCTS', res.data)
-          })
-          .catch(error => console.log(error))
+
+      // all products are stored in the API
+      // therefore we get it trough axios, and dispatch on app load
+      axios.get('/products')
+        .then(res => {
+          commit('INIT_PRODUCTS', res.data)
+        })
+        .catch(error => console.log(error))
     },
     initCategories: ({ commit }) => {
+
+      // all categories are stored in the API
+      // therefore we get it trough axios, and dispatch on app load
       axios.get('/categories')
         .then(res => {
           commit('INIT_CATEGORIES', res.data)
@@ -128,6 +139,7 @@ export default new Vuex.Store({
       return state.products
     },
     getProduct: (state) => (id) => {
+      // find product based on id given
       return state.products.find((product) => product.id === id)
     },
     getCategories: (state) => {
@@ -158,6 +170,8 @@ export default new Vuex.Store({
       return getters.getCart.reduce((prev, cur) => prev + cur.quantity, 0)
     },
     getDeliveryPrice: (state) => {
+      // to make delivery price more dynamic its set through the store
+      // to take advantage of this the calculation for total price is done here
       if (state.deliveryActive) {
         return state.deliveryPrice
       } else {
@@ -177,37 +191,52 @@ export default new Vuex.Store({
       }
     },
     getFulfillment: (state, getters) => {
+      
+      // to be able to presnt the order items in a viewable way,
+      // we create a new array called fulfillment, and joines data from the relevant parts
+      // of the app
 
+      // loop through every item in the orders array
       state.orders.forEach(order => {
-
+        
+        // create constructor for new object body
         const fulfillment = {
           id: order.id,
           orderlines: [],
           user: order.user
         }
 
+        // since there can be more orderlines in an order than one
+        // we loop trough all instances
         order.orderlines.forEach(orderline => {
+
+          // finding the product associated with the id from the cart and getting total price
           const product = getters.getProducts.find(product => product.id === orderline.productId)
           const totalPrice = product.price * orderline.quantity
 
+          // create new object to be pushed into the orderlines array
           const productInfo = {
             quantity: orderline.quantity,
             name: product.name,
             price: totalPrice
           }
 
+          // push object into fulfilment orderlines array
           fulfillment.orderlines.push(productInfo)
         })
         
+        // push fulfillment obhect to fulfillment array
         state.fulfillment.push(fulfillment)
       })
       
+      // return fulfillmetn array
       return state.fulfillment
     },
     getReviews: (state) => {
       return state.reviews
     },
     getProductReviews: (state) => (id) => {
+      // filter reviews based on matching menuItem id
       return state.reviews.filter((review) => review.menuItemId === id)
     }
   }

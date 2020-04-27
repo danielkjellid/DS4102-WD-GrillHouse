@@ -1,4 +1,5 @@
 <!-- component to display subtotal, delivery fee and price in the bottom of the cart -->
+<!-- dependant on cart -->
 <template>
   <div>
     <div>
@@ -7,6 +8,7 @@
         <span class="cart__footer-subtotal-text">Subtotal</span>
         <span class="cart__footer-subtotal-text">{{ subTotal | formatPrice | nokPrefix}}</span>
       </div>
+      <!-- if delivery is active, show delivery price -->
       <div v-if="$store.state.deliveryActive" class="cart__footer-subtotal">
         <span class="cart__footer-subtotal-text">Levering</span>
         <span class="cart__footer-subtotal-text">{{ deliveryPrice | formatPrice | nokPrefix }}</span>

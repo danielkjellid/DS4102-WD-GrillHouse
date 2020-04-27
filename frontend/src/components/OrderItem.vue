@@ -1,3 +1,5 @@
+<!-- component to display orders in the admin section -->
+<!-- dependant on OrderList -->
 <template>
   <v-card max-width="344">
     <v-card-title>Ordre #{{ order.id }}</v-card-title>
@@ -20,7 +22,17 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
 export default {
+  name: 'OrderItem',
   props: {
     order: {
       type: Object,

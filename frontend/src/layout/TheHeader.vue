@@ -1,6 +1,6 @@
 <!-- component to display global header used for naviagtion and info -->
 <template>
-  <!-- since we use margin to fit in sidecart, we reset when we're in the checkout -->
+  <!-- since we use margin to fit in sidecart, we reset when we're elsewere -->
   <v-app-bar app color="#fff" flat class="header" :class="{'header__reset' : $route.matched.some(({ name }) => name != 'Menu')}">
     <router-link to="/" class="d-flex align-center">
       <svg width="92" height="15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     toggleCart() {
-      /* emit button click to parent to change cart state */
+      // emit button click to parent to change cart state 
       this.$emit('toggle-cart');
     }
   }

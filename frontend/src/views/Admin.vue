@@ -7,9 +7,25 @@
           <v-col>
             <app-order-list></app-order-list>
             <!-- section to display categories -->
-            <app-admin-section class="mt-12" sectionTitle="Kategorier" sectionMainAction="Ny kateogri" :tableHeaders="categoryHeaders" :defaultItem="categoryStructure" dbInstance="/categories"></app-admin-section>
+            <app-admin-section 
+              class="mt-12" 
+              sectionTitle="Kategorier" 
+              sectionMainAction="Ny kateogri" 
+              :tableHeaders="categoryHeaders" 
+              :defaultItem="categoryStructure" 
+              dbInstance="/categories"
+            >
+            </app-admin-section>
             <!-- section to display products -->
-            <app-admin-section class="mt-12" sectionTitle="Produkter" sectionMainAction="Nytt produkt" :tableHeaders="productHeaders" :defaultItem="productStructure" dbInstance="/products"></app-admin-section>
+            <app-admin-section 
+              class="mt-12" 
+              sectionTitle="Produkter" 
+              sectionMainAction="Nytt produkt" 
+              :tableHeaders="productHeaders" 
+              :defaultItem="productStructure" 
+              dbInstance="/products"
+            >
+            </app-admin-section>
           </v-col>
         </v-row>
       </v-container>

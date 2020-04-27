@@ -1,3 +1,4 @@
+<!-- component to display a list of orders in /admin -->
 <template>
   <div>
     <h1 class="headline">Ordre</h1>
@@ -12,9 +13,17 @@
 </template>
 
 <script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
 import OrderItem from './OrderItem'
 
 export default {
+  name: 'OrderList',
   components: {
     'app-order-item': OrderItem,
   },

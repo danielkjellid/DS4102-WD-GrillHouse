@@ -1,3 +1,4 @@
+<!-- view to show a thank you message on completed checkout -->
 <template>
   <div class="confirmed">
     <div class="confirmed__image">
@@ -179,9 +180,19 @@
     </div>
   </div>
 </template>
-<script>
-export default {
 
+<script>
+// App imports (components without logic and dependancy)
+// -
+
+// General imports (componetns with logic)
+// -
+
+// Module imports (components dependant on this one)
+// -
+
+export default {
+  name: 'OrderConfirmed'
 }
 </script>
 

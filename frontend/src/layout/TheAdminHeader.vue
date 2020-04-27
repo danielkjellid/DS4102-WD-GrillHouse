@@ -1,3 +1,4 @@
+<!-- component for admin header shown in /admin -->
 <template>
   <div>
     <v-app-bar app color="indigo" dark>

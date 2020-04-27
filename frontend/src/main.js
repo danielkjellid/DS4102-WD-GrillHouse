@@ -35,7 +35,7 @@ Vue.filter('nokPrefix', (value) => {
 Vue.filter('formatPhone', (value) => {
   // clean the string
   const cleaned = ('' + value).replace(/\D/g, '')
-  // split number into bolks
+  // split number into blocks
   const match = cleaned.match(/^(\d{3})(\d{2})(\d{3})$/)
 
   if (match) {
