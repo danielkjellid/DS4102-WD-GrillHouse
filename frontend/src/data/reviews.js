@@ -4,7 +4,7 @@ export const reviewData = [
         reviewer: 'Ola Nordmann',
         reviewText: 'Wow! Denne burgeren er noe av det beste jeg har spist, denne kommer jeg absolutt til å bestille igjen!',
         starValue: 5,
-        timeStamp: '3 dager siden',
+        timeStamp: new Date('Apr 24, 2020, 12:00:00'),
         menuItemId: 6
     },
     {
@@ -12,7 +12,7 @@ export const reviewData = [
         reviewer: 'Kari Nordmann',
         reviewText: 'En fryd å putte i munnen! Kjøttet ble litt tørt dessverre, ellers hadde denne fått full pott.',
         starValue: 4,
-        timeStamp: '5 dager siden',
+        timeStamp: new Date('Apr 23, 2020, 13:00:00'),
         menuItemId: 4
     },
     {
@@ -20,7 +20,7 @@ export const reviewData = [
         reviewer: 'Ola Halvorsen',
         reviewText: 'Supergodt!',
         starValue: 3,
-        timeStamp: '5 dager siden',
+        timeStamp: new Date('Apr 25, 2020, 16:00:00'),
         menuItemId: 2
     },
     {
@@ -28,7 +28,7 @@ export const reviewData = [
         reviewer: 'Pontus Pilatus',
         reviewText: 'Dette var en tankevekker av en burger! ',
         starValue: 4,
-        timeStamp: '3 dager siden',
+        timeStamp: new Date('Apr 26, 2020, 12:00:00'),
         menuItemId: 3
     }
 ]

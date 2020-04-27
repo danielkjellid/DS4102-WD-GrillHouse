@@ -59,10 +59,21 @@ export default {
         starValue: this.starValue,
         timeStamp: new Date(),
         menuItemId: this.product.id,
-        id: Math.floor(Math.random()*90000) + 100000 // SKRIV ETTE ELLER SANNET
+        id: this.reviews.length + 1
       });
       // emit change to parent to close down form
       this.$emit('close-form');
+    },
+    // method for formatting the date
+    formatDate(date) {
+      const today = new Date()
+      // returns calculated difference between today and the date, so it displays x days since 
+      return Math.round((today - date)/(1000*60*60*24))
+    }
+  },
+  computed: {
+    reviews() {
+      return this.$store.getters.getReviews
     }
   }
 }

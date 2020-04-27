@@ -57,7 +57,12 @@ export default {
       return reviewsForProduct.reduce((acc, curr) => acc + curr.starValue, 0) / reviewsForProduct.length
     },
     getAmountOfReviews() {
-      return this.$store.getters.getProductReviews(this.product.id).length + " anmeldelser";
+      let amountOfReviews = this.$store.getters.getProductReviews(this.product.id).length
+      if (amountOfReviews === 1) {
+        return amountOfReviews + " anmeldelse"
+      } else {
+        return amountOfReviews + " anmeldelser"
+      }
     },
     activateItemModal(object) {
       // emit event to parent so it can control data state

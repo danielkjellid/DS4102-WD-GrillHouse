@@ -13,7 +13,10 @@
         {{review.reviewText}}
       </p>
       <app-review-stars :starValue="review.starValue"></app-review-stars>
-      <span class="review__content-timestamp">{{review.timeStamp}}</span>
+      <!-- format date so it says 'x days since' instead of date -->
+      <span v-if="formatDate(review.timeStamp) != 0 " class="review__content-timestamp">{{formatDate(review.timeStamp)}} dager siden</span>
+      <!-- if the date is today, write 'today' -->
+      <span v-else class="review__content-timestamp">I dag</span>
     </div>
   </div>
 </template>
@@ -42,6 +45,12 @@ export default {
   methods: {
     getReviews() {
       return this.reviews = this.$store.getters.getReviews
+    },
+    // method for formatting the date
+    formatDate(date) {
+      const today = new Date()
+      // returns calculated difference between today and the date, so it displays x days since 
+      return Math.round((today-date)/(1000*60*60*24))
     }
   }
 }

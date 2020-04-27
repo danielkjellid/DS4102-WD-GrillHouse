@@ -107,7 +107,6 @@ export default {
       // reset component data properties
       this.formActive = false;
       this.reviewSubmitted = false;
-      console.log(this.product.id)
       // emit change to parent to change data state 
       this.$emit('close-modal')
     },
