@@ -2,17 +2,17 @@
   <div>
     <app-header-image :imagePathMobile="'header-mobile.jpg'" :imagePathTablet="'header-tablet.jpg'" :imagePathDesktop="'header-desktop.jpg'"></app-header-image>
     <v-tabs color="#4633E8" height="60px" class="page-nav">
-      <v-tab v-for="category in filteredCategories" :key="category.id">{{ category.name }}</v-tab>
+      <v-tab v-for="category in filteredCategories" :key="category.id" :to="'#section-' + category.id">{{ category.name }}</v-tab>
     </v-tabs>
     <!-- display section list based on categories -->
-    <div v-for="category in filteredCategories" :key="category.id">
+    <div v-for="category in filteredCategories" :key="category.id" :id="'section-' + category.id">
       <app-menu-list :title="category.name">
         <!-- target MenuList slot to inject MenuItems -->
         <template #menu-items>
           <div v-for="product in products" :key="product.id">
             <div v-if="product.categoryId === category.id">
               <!-- use vuetifys grid system to oganize menuitems -->
-              <v-col sm="4" cols="12" xl="3">
+              <v-col sm="4" cols="12" xl="3" class="pl-0">
                 <app-menu-item @activate-item-modal="activateModal" :product="product"></app-menu-item>
               </v-col>
             </div>
@@ -51,7 +51,7 @@ export default {
   data() {
     return {
       itemModalActive: false,
-      selectedProduct: {}
+      selectedProduct: {},
     }
   },
   computed: {
@@ -72,7 +72,7 @@ export default {
       this.selectedProductId = productId
       this.selectedProduct = this.$store.getters.getProduct(productId)
       this.itemModalActive = true
-    }
+    },
   },
 }
 </script>

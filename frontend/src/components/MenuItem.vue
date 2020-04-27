@@ -103,6 +103,9 @@ export default {
     font-size: 0.875rem;
     font-weight: normal;
     color: #718096;
+    height: 42px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 
   .menu-item__meta-reviews {
@@ -165,6 +168,12 @@ export default {
   @media only screen and (min-width: 1270px){
     .menu-item {
       width: 445px;
+    }
+  }
+
+  @media only screen and (min-width: 1280px){
+    .menu-item {
+      width: 425px;
     }
   }
 
