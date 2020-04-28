@@ -10,7 +10,7 @@
             <app-admin-section 
               class="mt-12" 
               sectionTitle="Kategorier" 
-              sectionMainAction="Ny kateogri" 
+              sectionMainAction="Ny kategori" 
               :tableHeaders="categoryHeaders" 
               :defaultItem="categoryStructure" 
               dbInstance="/categories"
